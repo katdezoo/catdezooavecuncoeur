@@ -15,6 +15,25 @@
       overflow-x: hidden;
     }
 
+    .intro-page {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      color: white;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
     .gif-bg {
       position: fixed;
       top: 0;
@@ -144,6 +163,10 @@
     }
 
     @media screen and (max-width: 600px) {
+      .intro-page {
+        font-size: 22px;
+      }
+
       .gif-bg {
         background-size: 100% 120%;
         background-position: center center;
@@ -212,6 +235,10 @@
 
 <body>
 
+  <div id="introPage" class="intro-page">
+    no epylepsy please and no headphones please
+  </div>
+
   <div class="gif-bg"></div>
 
   <div class="overlay">
@@ -255,6 +282,10 @@
   </div>
 
   <script>
+    setTimeout(function() {
+      document.getElementById("introPage").style.display = "none";
+    }, 5000);
+
     function afficherSection(id) {
       const sections = document.querySelectorAll(".page-section");
 
