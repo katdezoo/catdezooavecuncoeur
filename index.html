@@ -145,14 +145,19 @@
 
     .page-section {
       display: none;
-      min-height: 70vh;
+      min-height: auto;
       max-width: 900px;
-      margin: auto;
+      width: 100%;
+      margin: 0 auto;
       text-align: center;
       padding: 20px;
       pointer-events: none;
-      position: relative;
+      position: fixed;
+      top: 58vh;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 40;
+      box-sizing: border-box;
     }
 
     .active {
@@ -183,7 +188,7 @@
       background: transparent;
       padding: 25px;
       border-radius: 12px;
-      margin-top: 40px;
+      margin-top: 0;
       text-align: center;
       position: relative;
       z-index: 45;
@@ -191,11 +196,11 @@
 
     @media screen and (min-width: 601px) {
       #apropos .card {
-        margin-top: -90px;
+        margin-top: 0;
       }
 
       #contact .card {
-        margin-top: 10px;
+        margin-top: 0;
       }
     }
 
@@ -267,6 +272,7 @@
       }
 
       .page-section {
+        top: 67vh;
         min-height: auto;
         padding: 10px 12px 140px 12px;
         margin: 0 auto;
