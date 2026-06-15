@@ -125,7 +125,7 @@
     .paris-timer {
       color: purple;
       font-family: Arial, sans-serif;
-      font-size: 28px;
+      font-size: 40px;
       font-weight: bold;
       text-align: center;
       text-shadow: 3px 3px 8px white;
@@ -243,7 +243,7 @@
       }
 
       .paris-timer {
-        font-size: 22px;
+        font-size: 35px;
         margin-top: 5px;
       }
 
@@ -324,7 +324,7 @@
       <button onclick="afficherSection('contact')">SEND A WAV / MP3</button>
     </nav>
 
-    <div id="parisTimer" class="paris-timer">00:00</div>
+    <div id="parisTimer" class="paris-timer">00:00:00</div>
 
     <section id="accueil" class="page-section active">
     </section>
@@ -400,6 +400,7 @@
         timeZone: "Europe/Paris",
         hour: "2-digit",
         minute: "2-digit",
+        second: "2-digit",
         hourCycle: "h23"
       }).format(maintenant);
 
