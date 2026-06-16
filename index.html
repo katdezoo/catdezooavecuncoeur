@@ -353,6 +353,42 @@
       max-width: 80vw;
     }
 
+    .audio-word-display {
+      min-height: 24px;
+      margin-bottom: 4px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff4fd8;
+      -webkit-text-stroke: 0.6px #00ff00;
+      paint-order: stroke fill;
+      text-shadow:
+        -2px -2px 0 #000000,
+        0 -2px 0 #000000,
+        2px -2px 0 #000000,
+        -2px 0 0 #000000,
+        2px 0 0 #000000,
+        -2px 2px 0 #000000,
+        0 2px 0 #000000,
+        2px 2px 0 #000000,
+        0 0 4px #000000,
+        0 0 18px #ff0000,
+        0 0 45px #ff0000,
+        0 0 85px #ff0000;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.08s linear, transform 0.08s linear;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .audio-word-display.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     audio {
       display: block;
       width: 100%;
@@ -592,6 +628,12 @@
         max-width: 70vw;
       }
 
+      .audio-word-display {
+        min-height: 18px;
+        margin-bottom: 3px;
+        font-size: 15px;
+      }
+
       audio {
         width: 100%;
         max-width: 100%;
@@ -699,6 +741,12 @@
         margin: 0 auto 18px auto;
       }
 
+      .audio-word-display {
+        min-height: 15px;
+        margin-bottom: 2px;
+        font-size: 12px;
+      }
+
       audio {
         height: 24px;
       }
@@ -790,10 +838,12 @@
   </div>
 
   <div class="audio-box">
-    <audio id="lecteurAudio" controls preload="metadata">
-      <source src="./musique432.wav?v=50" type="audio/wav">
-      <source src="./musique432.mp3?v=50" type="audio/mpeg">
-    </audio>
+    <div id="audioWordDisplay" class="audio-word-display"></div>
+
+<audio id="lecteurAudio" controls preload="metadata">
+  <source src="./musique432.wav?v=50" type="audio/wav">
+  <source src="./musique432.mp3?v=50" type="audio/mpeg">
+</audio>
 
 <div class="volume-boost-box">
   <label for="volumeBoost">volume <span id="volumeValue">100%</span></label>
@@ -1063,6 +1113,39 @@
       mettreAJourProgressionDepuisAudio();
     }
 
+    function initialiserMotsAudio() {
+      const lecteur = document.getElementById("lecteurAudio");
+      const audioWordDisplay = document.getElementById("audioWordDisplay");
+
+      function mettreAJourMotAudio() {
+        let mot = "";
+
+        if (!lecteur.paused && !lecteur.ended) {
+          const temps = lecteur.currentTime;
+
+          if (temps >= 10 && temps < 10.75) {
+            mot = "choqué";
+          } else if (temps >= 10.75 && temps <= 11.5) {
+            mot = "turbine";
+          }
+        }
+
+        if (mot) {
+          audioWordDisplay.textContent = mot;
+          audioWordDisplay.classList.add("active");
+        } else {
+          audioWordDisplay.textContent = "";
+          audioWordDisplay.classList.remove("active");
+        }
+      }
+
+      lecteur.addEventListener("timeupdate", mettreAJourMotAudio);
+      lecteur.addEventListener("seeked", mettreAJourMotAudio);
+      lecteur.addEventListener("play", mettreAJourMotAudio);
+      lecteur.addEventListener("pause", mettreAJourMotAudio);
+      lecteur.addEventListener("ended", mettreAJourMotAudio);
+    }
+
     function activerAudioBoost() {
       const lecteur = document.getElementById("lecteurAudio");
       const volumeBoost = document.getElementById("volumeBoost");
@@ -1129,6 +1212,7 @@
 
     initialiserVolumeBoost();
     initialiserAudioProgression();
+    initialiserMotsAudio();
     afficherHeureParis();
     setInterval(afficherHeureParis, 1000);
   </script>
