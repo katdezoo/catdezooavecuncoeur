@@ -354,6 +354,8 @@
     }
 
     .audio-word-display {
+      --sous-titre-contour: 1px;
+
       min-height: clamp(40px, 6vw, 68px);
       width: max-content;
       max-width: min(96vw, 820px);
@@ -369,7 +371,7 @@
       font-weight: 700;
       line-height: 1;
       color: #ff0000;
-      -webkit-text-stroke: 0.6px #000000;
+      -webkit-text-stroke: var(--sous-titre-contour) #000000;
       paint-order: stroke fill;
       text-shadow: 0 0 1px #000000;
       opacity: 0;
@@ -622,15 +624,14 @@
       }
 
       .audio-word-display {
+        --sous-titre-contour: 0.55px;
+
         min-height: clamp(28px, 8vw, 42px);
         max-width: min(98vw, 420px);
         margin-bottom: 5px;
         font-family: Arial, Helvetica, sans-serif;
         font-size: clamp(20px, 5.6vw, 34px);
         font-weight: 700;
-        -webkit-text-stroke: 0.6px #000000;
-        paint-order: stroke fill;
-        text-shadow: 0 0 1px #000000;
       }
 
       audio {
@@ -741,15 +742,14 @@
       }
 
       .audio-word-display {
+        --sous-titre-contour: 0.7px;
+
         min-height: clamp(26px, 7vw, 44px);
         max-width: min(96vw, 560px);
         margin-bottom: 4px;
         font-family: Arial, Helvetica, sans-serif;
         font-size: clamp(20px, 5vw, 38px);
         font-weight: 700;
-        -webkit-text-stroke: 0.6px #000000;
-        paint-order: stroke fill;
-        text-shadow: 0 0 1px #000000;
       }
 
       audio {
@@ -872,7 +872,6 @@
 <div class="audio-footer">
   <p>© 2026 catdezoo&lt;3. all rights reserved.</p>
 </div>
-
   </div>
 
   <script>
