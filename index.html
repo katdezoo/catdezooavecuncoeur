@@ -418,9 +418,7 @@
   </div>
 
   <div class="audio-box">
-    <audio id="lecteurAudio" controls>
-      <source src="./musique42.wav" type="audio/wav">
-    </audio>
+    <audio id="lecteurAudio" controls preload="metadata" src="./musique432.wav?v=50"></audio>
   </div>
 
   <script>
@@ -432,6 +430,9 @@
       document.getElementById("introText").style.display = "none";
       document.getElementById("introGif").style.display = "block";
       document.querySelector(".audio-box").style.display = "block";
+
+      const lecteur = document.getElementById("lecteurAudio");
+      lecteur.load();
     }, 4000);
 
     setTimeout(function() {
@@ -457,7 +458,11 @@
       afficherSection('accueil');
 
       const lecteur = document.getElementById("lecteurAudio");
-      lecteur.play();
+
+      lecteur.play().catch(function() {
+        document.querySelector(".audio-box").style.display = "block";
+        console.log("Le lecteur est visible. Appuie directement sur play dans le lecteur.");
+      });
     }
 
     function afficherHeureParis() {
