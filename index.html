@@ -405,6 +405,7 @@
       width: 100%;
       cursor: pointer;
       accent-color: #ff0000;
+      touch-action: pan-x;
     }
 
     .volume-warning {
@@ -689,7 +690,7 @@
 
 <section id="contact" class="page-section">
   <div class="card">
-    <h1>@@gmail.com</h1>
+    <h1>@gmail.com</h1>
   </div>
 </section>
 
@@ -774,6 +775,9 @@
       const volumeValue = document.getElementById("volumeValue");
       const volumeWarning = document.getElementById("volumeWarning");
 
+      let animationVolume = null;
+      let dernierRelachementVolume = 0;
+
       function smartphoneOuTactile() {
         return window.matchMedia("(max-width: 600px), (pointer: coarse)").matches;
       }
@@ -786,8 +790,12 @@
         return valeur;
       }
 
+      function courbeDouce(progression) {
+        return 1 - Math.pow(1 - progression, 3);
+      }
+
       function appliquerVolume(valeur) {
-        volumeValue.textContent = valeur + "%";
+        volumeValue.textContent = Math.round(valeur) + "%";
 
         if (gainNode) {
           gainNode.gain.value = valeur / 100;
@@ -800,40 +808,90 @@
         }
       }
 
-      function mettreAJourVolume(avecAimant) {
+      function animerVolumeVers100(valeurDepart) {
+        if (animationVolume) {
+          cancelAnimationFrame(animationVolume);
+          animationVolume = null;
+        }
+
+        const debut = performance.now();
+        const duree = 220;
+        const arrivee = 100;
+
+        function animation(temps) {
+          const progression = Math.min((temps - debut) / duree, 1);
+          const valeurAnimee = valeurDepart + (arrivee - valeurDepart) * courbeDouce(progression);
+          const valeurArrondie = Math.round(valeurAnimee);
+
+          volumeBoost.value = valeurArrondie;
+          appliquerVolume(valeurArrondie);
+
+          if (progression < 1) {
+            animationVolume = requestAnimationFrame(animation);
+          } else {
+            volumeBoost.value = 100;
+            appliquerVolume(100);
+            animationVolume = null;
+          }
+        }
+
+        animationVolume = requestAnimationFrame(animation);
+      }
+
+      function mettreAJourVolume(avecAimant, aimantFluide) {
         let valeur = Number(volumeBoost.value);
 
         if (avecAimant) {
-          valeur = appliquerAimant(valeur);
+          const valeurAimantee = appliquerAimant(valeur);
+
+          if (aimantFluide && valeurAimantee === 100 && valeur !== 100) {
+            animerVolumeVers100(valeur);
+            return;
+          }
+
+          valeur = valeurAimantee;
           volumeBoost.value = valeur;
         }
 
         appliquerVolume(valeur);
       }
 
+      function relacherVolume() {
+        if (!smartphoneOuTactile()) {
+          mettreAJourVolume(true, false);
+          return;
+        }
+
+        const maintenant = Date.now();
+
+        if (maintenant - dernierRelachementVolume < 120) {
+          return;
+        }
+
+        dernierRelachementVolume = maintenant;
+        mettreAJourVolume(true, true);
+      }
+
       volumeBoost.addEventListener("input", function() {
         activerAudioBoost();
 
+        if (animationVolume) {
+          cancelAnimationFrame(animationVolume);
+          animationVolume = null;
+        }
+
         if (smartphoneOuTactile()) {
-          mettreAJourVolume(false);
+          mettreAJourVolume(false, false);
         } else {
-          mettreAJourVolume(true);
+          mettreAJourVolume(true, false);
         }
       });
 
-      volumeBoost.addEventListener("change", function() {
-        mettreAJourVolume(true);
-      });
+      volumeBoost.addEventListener("change", relacherVolume);
+      volumeBoost.addEventListener("touchend", relacherVolume);
+      volumeBoost.addEventListener("pointerup", relacherVolume);
 
-      volumeBoost.addEventListener("touchend", function() {
-        mettreAJourVolume(true);
-      });
-
-      volumeBoost.addEventListener("pointerup", function() {
-        mettreAJourVolume(true);
-      });
-
-      mettreAJourVolume(true);
+      mettreAJourVolume(true, false);
     }
 
     function activerAudioBoost() {
