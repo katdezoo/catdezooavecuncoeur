@@ -3504,6 +3504,55 @@
       }
     }
 
+  
+    /* Smartphone : même écart entre la flèche haute et le contour haut que la flèche basse */
+    @media screen and (max-width: 768px) {
+      #apropos {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+      }
+
+      #apropos .card::before {
+        margin-top: 0 !important;
+        margin-bottom: 12px !important;
+      }
+
+      #apropos .card::after {
+        margin-top: 12px !important;
+        margin-bottom: 0 !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #apropos {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+      }
+
+      #apropos .card::before {
+        margin-bottom: 11px !important;
+      }
+
+      #apropos .card::after {
+        margin-top: 11px !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos {
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+      }
+
+      #apropos .card::before {
+        margin-bottom: 8px !important;
+      }
+
+      #apropos .card::after {
+        margin-top: 8px !important;
+      }
+    }
+
   </style>
 
 </head>
