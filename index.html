@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>okunsitequoi</title>
+  <title>PRODUCERSWORLDCUP</title>
 
   <style>
     @font-face {
@@ -1453,6 +1453,37 @@
       }
     }
 
+  
+    @media screen and (min-width: 1025px) {
+      .volume-boost-box label {
+        transform: translateY(-4px);
+        margin-bottom: -1px;
+      }
+    }
+
+  
+    .volume-white-glow-layer {
+      will-change: transform, opacity;
+      transform: translate3d(-50%, -50%, 0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      contain: paint;
+    }
+
+    @media screen and (max-width: 600px) {
+      .volume-white-glow-layer {
+        transition: opacity 80ms linear;
+        transform: translate3d(-50%, -50%, 0);
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      .volume-white-glow-layer {
+        transition: opacity 80ms linear;
+        transform: translate3d(-50%, -50%, 0);
+      }
+    }
+
   </style>
 
 </head>
@@ -1586,6 +1617,20 @@
     }, 9750);
 
 
+
+    let animationEffetsBlancsVolume = null;
+
+    function demanderMajEffetsBlancsVolume() {
+      if (animationEffetsBlancsVolume) {
+        return;
+      }
+
+      animationEffetsBlancsVolume = requestAnimationFrame(function() {
+        animationEffetsBlancsVolume = null;
+        mettreAJourEffetsBlancsVolumeGlobal();
+      });
+    }
+
     function mettreAJourEffetsBlancsVolumeGlobal(valeurForcee) {
       const volumeBoost = document.getElementById("volumeBoost");
       const volumeLabel = document.querySelector(".volume-boost-box label");
@@ -1662,6 +1707,7 @@
       function appliquerVolume(valeur) {
         volumeValue.textContent = Math.round(valeur) + "%";
         mettreAJourEffetsBlancsVolumeGlobal(valeur);
+        setTimeout(demanderMajEffetsBlancsVolume, 0);
         const volumeMin = Number(volumeBoost.min);
         const volumeMax = Number(volumeBoost.max);
         const positionVolume = Math.min(100, Math.max(0, ((valeur - volumeMin) / (volumeMax - volumeMin)) * 100));
@@ -1979,15 +2025,18 @@
     }
 
 
-    window.addEventListener("resize", function() {
-      mettreAJourEffetsBlancsVolumeGlobal();
-    });
+    window.addEventListener("resize", demanderMajEffetsBlancsVolume, { passive: true });
+    window.addEventListener("scroll", demanderMajEffetsBlancsVolume, { passive: true });
+    window.addEventListener("touchmove", demanderMajEffetsBlancsVolume, { passive: true });
 
     window.addEventListener("orientationchange", function() {
-      setTimeout(function() {
-        mettreAJourEffetsBlancsVolumeGlobal();
-      }, 150);
-    });
+      setTimeout(demanderMajEffetsBlancsVolume, 150);
+    }, { passive: true });
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", demanderMajEffetsBlancsVolume, { passive: true });
+      window.visualViewport.addEventListener("scroll", demanderMajEffetsBlancsVolume, { passive: true });
+    }
 
     setTimeout(function() {
       mettreAJourEffetsBlancsVolumeGlobal();
