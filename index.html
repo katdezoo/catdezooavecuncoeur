@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>-ok a website/</title>
+  <title>websitetypeshit</title>
 
   <style>
     @font-face {
@@ -2817,6 +2817,138 @@
       #apropos,
       #contact {
         margin-top: 55vh !important;
+      }
+
+      #apropos h1 {
+        font-size: clamp(12px, 2.6vw, 16px) !important;
+        line-height: 1.15 !important;
+      }
+
+      #contact h1 {
+        font-size: clamp(18px, 5vw, 28px) !important;
+      }
+    }
+
+  
+    /* Smartphone : texte RULES fixe, sous les lettres du GIF, avec scroll interne */
+    @media screen and (max-width: 768px) {
+      .overlay {
+        min-height: 130vh !important;
+        padding-bottom: calc(300px + env(safe-area-inset-bottom)) !important;
+      }
+
+      @supports (height: 100dvh) {
+        .overlay {
+          min-height: 130dvh !important;
+        }
+      }
+
+      .page-section {
+        position: fixed !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+        z-index: 16000 !important;
+        pointer-events: none !important;
+      }
+
+      #apropos,
+      #contact {
+        top: 57vh !important;
+        bottom: calc(205px + env(safe-area-inset-bottom)) !important;
+        margin-top: 0 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+      }
+
+      @supports (height: 100dvh) {
+        #apropos,
+        #contact {
+          top: 57dvh !important;
+        }
+      }
+
+      #apropos.active,
+      #contact.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        pointer-events: auto !important;
+      }
+
+      #apropos .card,
+      #contact .card {
+        width: 100% !important;
+        max-width: 96vw !important;
+        margin: 0 auto !important;
+        padding: 8px !important;
+        box-sizing: border-box !important;
+      }
+
+      #apropos h1 {
+        font-size: clamp(15px, 4.6vw, 21px) !important;
+        line-height: 1.22 !important;
+        margin: 0 !important;
+      }
+
+      #contact h1 {
+        font-size: clamp(25px, 8.4vw, 36px) !important;
+        line-height: 1.05 !important;
+        margin: 0 !important;
+      }
+
+      #accueil.page-section {
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        transform: none !important;
+        min-height: 76vh !important;
+      }
+
+      @supports (height: 100dvh) {
+        #accueil.page-section {
+          min-height: 76dvh !important;
+        }
+      }
+
+      .audio-box {
+        position: fixed !important;
+        bottom: calc(34px + env(safe-area-inset-bottom)) !important;
+        z-index: 20000 !important;
+      }
+
+      nav {
+        z-index: 30000 !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #apropos,
+      #contact {
+        top: 59vh !important;
+        bottom: calc(205px + env(safe-area-inset-bottom)) !important;
+      }
+
+      @supports (height: 100dvh) {
+        #apropos,
+        #contact {
+          top: 59dvh !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos,
+      #contact {
+        top: 47vh !important;
+        bottom: calc(120px + env(safe-area-inset-bottom)) !important;
       }
 
       #apropos h1 {
