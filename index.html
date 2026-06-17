@@ -982,9 +982,10 @@
 
       function appliquerAimant(valeur) {
         const centreAimant = 100;
-        const margeAimant = 53;
+        const margeAimantGauche = 75;
+        const margeAimantDroite = 49;
 
-        if (valeur >= centreAimant - margeAimant && valeur <= centreAimant + margeAimant) {
+        if (valeur >= centreAimant - margeAimantGauche && valeur <= centreAimant + margeAimantDroite) {
           return 100;
         }
 
