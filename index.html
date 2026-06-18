@@ -4864,104 +4864,45 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP : vidéo évidée, on garde seulement le contour vert */
-    :root {
-      --fond-video-ratio: 2.2421875; /* 574 / 256 */
-      --fond-video-contour-size: clamp(22px, 5.2vw, 54px);
-      --fond-video-contour-size-mobile: clamp(18px, 7vw, 42px);
-      --fond-video-bg: #ff00ff;
+    /* GLOBAL PRODUCERS CUP : fond.mp4 en loop + suppression du blanc seulement */
+    .fond-canvas-chroma {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      min-width: 100vw !important;
+      min-height: 100vh !important;
+      background: #ff00ff !important;
+      pointer-events: none !important;
+      z-index: 0 !important;
+      transform: translate3d(0, 0, 0) !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      contain: layout paint size style !important;
     }
 
-    body,
+    .video-bg {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
     .gif-bg,
     .intro-gif {
-      background-color: var(--fond-video-bg) !important;
+      background-image: none !important;
+      background-color: #ff00ff !important;
     }
 
-    .video-bg,
-    .intro-video {
-      background: transparent !important;
-      overflow: hidden !important;
-      -webkit-mask-image:
-        linear-gradient(#000 0 0),
-        linear-gradient(#000 0 0),
-        linear-gradient(#000 0 0),
-        linear-gradient(#000 0 0) !important;
-      -webkit-mask-size:
-        100% var(--fond-video-contour-size),
-        100% var(--fond-video-contour-size),
-        var(--fond-video-contour-size) 100%,
-        var(--fond-video-contour-size) 100% !important;
-      -webkit-mask-position:
-        top center,
-        bottom center,
-        left center,
-        right center !important;
-      -webkit-mask-repeat: no-repeat !important;
-      mask-image:
-        linear-gradient(#000 0 0),
-        linear-gradient(#000 0 0),
-        linear-gradient(#000 0 0),
-        linear-gradient(#000 0 0) !important;
-      mask-size:
-        100% var(--fond-video-contour-size),
-        100% var(--fond-video-contour-size),
-        var(--fond-video-contour-size) 100%,
-        var(--fond-video-contour-size) 100% !important;
-      mask-position:
-        top center,
-        bottom center,
-        left center,
-        right center !important;
-      mask-repeat: no-repeat !important;
-    }
-
-    /* Desktop/tablette : la vidéo reprend le ratio du GIF pour que le contour tombe au bon endroit */
-    @media screen and (min-width: 769px) {
-      .video-bg,
-      .intro-video {
-        left: 50% !important;
-        top: 50% !important;
-        width: min(100vw, calc(100vh * var(--fond-video-ratio))) !important;
-        height: min(100vh, calc(100vw / var(--fond-video-ratio))) !important;
-        min-width: 0 !important;
-        min-height: 0 !important;
-        object-fit: fill !important;
-        object-position: center center !important;
-        transform: translate3d(-50%, -50%, 0) !important;
-      }
-    }
-
-    /* Smartphone : on garde la déformation du GIF d'avant, mais en ne montrant que le contour */
     @media screen and (max-width: 768px) {
-      .video-bg,
-      .intro-video {
-        left: 0 !important;
-        top: 0 !important;
-        width: 100vw !important;
+      .fond-canvas-chroma {
         height: 100vh !important;
-        min-width: 100vw !important;
         min-height: 100vh !important;
-        object-fit: fill !important;
-        object-position: center center !important;
-        transform: translate3d(0, 0, 0) scale(1, 1.2) !important;
-        -webkit-mask-size:
-          100% var(--fond-video-contour-size-mobile),
-          100% var(--fond-video-contour-size-mobile),
-          var(--fond-video-contour-size-mobile) 100%,
-          var(--fond-video-contour-size-mobile) 100% !important;
-        mask-size:
-          100% var(--fond-video-contour-size-mobile),
-          100% var(--fond-video-contour-size-mobile),
-          var(--fond-video-contour-size-mobile) 100%,
-          var(--fond-video-contour-size-mobile) 100% !important;
       }
     }
 
     @supports (height: 100dvh) {
       @media screen and (max-width: 768px) {
-        .video-bg,
-        .intro-video {
+        .fond-canvas-chroma {
           height: 100dvh !important;
           min-height: 100dvh !important;
         }
@@ -4970,28 +4911,10 @@
 
     @supports (-webkit-touch-callout: none) {
       @media screen and (max-width: 768px) {
-        .video-bg,
-        .intro-video {
+        .fond-canvas-chroma {
           height: -webkit-fill-available !important;
           min-height: 100vh !important;
         }
-      }
-    }
-
-    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-      .video-bg,
-      .intro-video {
-        transform: translate3d(0, 0, 0) scale(1, 1.12) !important;
-        -webkit-mask-size:
-          100% 18px,
-          100% 18px,
-          18px 100%,
-          18px 100% !important;
-        mask-size:
-          100% 18px,
-          100% 18px,
-          18px 100%,
-          18px 100% !important;
       }
     }
 
@@ -5008,7 +4931,9 @@
 <video id="introVideo" class="intro-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
   <source src="./fond.mp4" type="video/mp4">
 </video>
-  </div>
+  
+<canvas id="fondCanvasChroma" class="fond-canvas-chroma" aria-hidden="true"></canvas>
+</div>
 
   <div class="gif-bg"></div>
 <video id="fondVideo" class="video-bg" autoplay muted loop playsinline webkit-playsinline preload="auto">
@@ -5929,6 +5854,220 @@
   });
   document.addEventListener("click", assurerLoopFondMp4, { once: true });
   document.addEventListener("touchstart", assurerLoopFondMp4, { once: true });
+</script>
+
+
+<script>
+  (function() {
+    function demarrerFondChroma() {
+      const video = document.getElementById("fondVideo");
+      const canvas = document.getElementById("fondCanvasChroma");
+
+      if (!video || !canvas || !canvas.getContext) {
+        if (video) {
+          video.style.opacity = "1";
+          video.style.visibility = "visible";
+        }
+        return;
+      }
+
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const buffer = document.createElement("canvas");
+      const bctx = buffer.getContext("2d", { willReadFrequently: true });
+
+      let largeurSource = 574;
+      let hauteurSource = 256;
+      let animation = null;
+
+      function reglerVideo() {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.loop = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.preload = "auto";
+
+        video.setAttribute("muted", "");
+        video.setAttribute("loop", "");
+        video.setAttribute("autoplay", "");
+        video.setAttribute("playsinline", "");
+        video.setAttribute("webkit-playsinline", "");
+        video.setAttribute("preload", "auto");
+      }
+
+      function tailleViewport() {
+        const vw = window.visualViewport && window.visualViewport.width ? window.visualViewport.width : window.innerWidth;
+        const vh = window.visualViewport && window.visualViewport.height ? window.visualViewport.height : window.innerHeight;
+        return { vw: Math.max(1, Math.round(vw)), vh: Math.max(1, Math.round(vh)) };
+      }
+
+      function redimensionnerCanvas() {
+        const taille = tailleViewport();
+        const ratio = Math.min(window.devicePixelRatio || 1, 1.35);
+
+        const w = Math.round(taille.vw * ratio);
+        const h = Math.round(taille.vh * ratio);
+
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+        }
+
+        canvas.style.width = taille.vw + "px";
+        canvas.style.height = taille.vh + "px";
+      }
+
+      function reglerBuffer() {
+        const vw = video.videoWidth || largeurSource;
+        const vh = video.videoHeight || hauteurSource;
+
+        const maxLargeur = 640;
+        const ratio = vw / vh;
+
+        largeurSource = Math.min(maxLargeur, vw);
+        hauteurSource = Math.round(largeurSource / ratio);
+
+        if (buffer.width !== largeurSource || buffer.height !== hauteurSource) {
+          buffer.width = largeurSource;
+          buffer.height = hauteurSource;
+        }
+      }
+
+      function dessiner() {
+        animation = requestAnimationFrame(dessiner);
+
+        if (!video.videoWidth || !video.videoHeight || video.readyState < 2) {
+          return;
+        }
+
+        redimensionnerCanvas();
+        reglerBuffer();
+
+        bctx.clearRect(0, 0, largeurSource, hauteurSource);
+        bctx.drawImage(video, 0, 0, largeurSource, hauteurSource);
+
+        let image;
+        try {
+          image = bctx.getImageData(0, 0, largeurSource, hauteurSource);
+        } catch (e) {
+          video.style.opacity = "1";
+          video.style.visibility = "visible";
+          cancelAnimationFrame(animation);
+          animation = null;
+          return;
+        }
+
+        const data = image.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+
+          const max = Math.max(r, g, b);
+          const min = Math.min(r, g, b);
+
+          /* Supprime seulement le blanc / gris très clair du fond vidéo.
+             Les contours verts restent visibles. */
+          if (r > 225 && g > 225 && b > 225 && (max - min) < 34) {
+            data[i] = 255;
+            data[i + 1] = 0;
+            data[i + 2] = 255;
+            data[i + 3] = 255;
+          }
+        }
+
+        bctx.putImageData(image, 0, 0);
+
+        const cw = canvas.width;
+        const ch = canvas.height;
+        const mobile = window.innerWidth <= 768;
+        const paysage = window.innerWidth <= 900 && window.innerHeight <= 500 && window.matchMedia("(orientation: landscape)").matches;
+
+        ctx.clearRect(0, 0, cw, ch);
+        ctx.fillStyle = "#ff00ff";
+        ctx.fillRect(0, 0, cw, ch);
+
+        if (mobile) {
+          const scaleY = paysage ? 1.12 : 1.2;
+          ctx.save();
+          ctx.translate(0, ch * (1 - scaleY) / 2);
+          ctx.drawImage(buffer, 0, 0, cw, ch * scaleY);
+          ctx.restore();
+        } else {
+          const ratioVideo = largeurSource / hauteurSource;
+          const ratioCanvas = cw / ch;
+
+          let dw;
+          let dh;
+
+          if (ratioCanvas > ratioVideo) {
+            dh = ch;
+            dw = dh * ratioVideo;
+          } else {
+            dw = cw;
+            dh = dw / ratioVideo;
+          }
+
+          const dx = (cw - dw) / 2;
+          const dy = (ch - dh) / 2;
+          ctx.drawImage(buffer, dx, dy, dw, dh);
+        }
+      }
+
+      function lancer() {
+        reglerVideo();
+
+        const lecture = video.play();
+        if (lecture && typeof lecture.catch === "function") {
+          lecture.catch(function() {});
+        }
+
+        if (!animation) {
+          animation = requestAnimationFrame(dessiner);
+        }
+      }
+
+      video.addEventListener("loadedmetadata", function() {
+        reglerBuffer();
+        lancer();
+      });
+
+      video.addEventListener("ended", function() {
+        try {
+          video.currentTime = 0;
+          video.play();
+        } catch (e) {}
+      });
+
+      video.addEventListener("pause", function() {
+        if (!document.hidden) {
+          lancer();
+        }
+      });
+
+      window.addEventListener("resize", redimensionnerCanvas, { passive: true });
+      window.addEventListener("orientationchange", function() {
+        setTimeout(redimensionnerCanvas, 250);
+      }, { passive: true });
+
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", redimensionnerCanvas, { passive: true });
+      }
+
+      lancer();
+    }
+
+    window.addEventListener("DOMContentLoaded", demarrerFondChroma);
+    window.addEventListener("pageshow", demarrerFondChroma);
+    document.addEventListener("visibilitychange", function() {
+      if (!document.hidden) {
+        demarrerFondChroma();
+      }
+    });
+    document.addEventListener("click", demarrerFondChroma, { once: true });
+    document.addEventListener("touchstart", demarrerFondChroma, { once: true });
+  })();
 </script>
 
 </body>
