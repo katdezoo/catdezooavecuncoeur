@@ -4667,7 +4667,7 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP : ./latbien.mp4 ajusté comme l'ancien GIF */
+    /* GLOBAL PRODUCERS CUP : ././latbien.mp4 ajusté comme l'ancien GIF */
     :root {
       --fond-video-bg: #ff00ff;
       --fond-video-position: center center;
@@ -4750,7 +4750,7 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP FINAL : ./latbien.mp4 rose/vert visible + loop, comme le GIF */
+    /* GLOBAL PRODUCERS CUP FINAL : ././latbien.mp4 rose/vert visible + loop, comme le GIF */
     :root {
       --fond-video-bg: #ff00ff;
     }
@@ -4861,7 +4861,7 @@
     }
 
   
-    /* GLOBAL PRODUCERS CUP : ./latbien.mp4 plein écran 100%, sans crop, loop partout */
+    /* GLOBAL PRODUCERS CUP : ././latbien.mp4 plein écran 100%, sans crop, loop partout */
     :root {
       --fond-video-bg: #ff00ff;
     }
@@ -4958,7 +4958,7 @@
     }
 
   
-/* GLOBAL PRODUCERS CUP : audit responsive final RULES + ./latbien.mp4 */
+/* GLOBAL PRODUCERS CUP : audit responsive final RULES + ././latbien.mp4 */
 :root {
   --fond-video-bg: #ff00ff;
   --rules-desktop-font: clamp(16px, 1.42vw, 21px);
@@ -5523,45 +5523,6 @@ body {
     line-height: 1.16 !important;
   }
 }
-  
-/* RULES : box petite/originale conservée, juste un tout petit peu plus bas */
-@media screen and (max-width: 768px) {
-  :root {
-    --magicbox-mobile-down: clamp(18px, 3vh, 28px);
-  }
-
-  #apropos {
-    top: var(--magicbox-top, 60dvh) !important;
-    height: var(--magicbox-height, calc(100dvh - 60dvh - 205px - env(safe-area-inset-bottom))) !important;
-    min-height: 96px !important;
-    max-height: none !important;
-    width: calc(100vw - 24px) !important;
-    max-width: calc(100vw - 24px) !important;
-    padding: 30px 12px 30px 12px !important;
-    transform: translate3d(-50%, var(--magicbox-mobile-down), 0) !important;
-  }
-
-  #apropos h1 {
-    font-size: clamp(15px, 4.6vw, 21px) !important;
-    line-height: 1.22 !important;
-  }
-
-  #apropos .card {
-    padding: 0 !important;
-  }
-}
-
-@media screen and (max-width: 430px) and (min-height: 760px) {
-  #apropos {
-    transform: translate3d(-50%, clamp(15px, 2.5vh, 24px), 0) !important;
-  }
-}
-
-@media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-  #apropos {
-    transform: translate3d(-50%, 10px, 0) !important;
-  }
-}
   </style>
 
 </head>
@@ -5573,13 +5534,13 @@ body {
       and headphones please/</span>
     <div id="introGif" class="intro-gif"></div>
 <video id="introVideo" class="intro-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
-  <source src="./latbien.mp4" type="video/mp4">
+  <source src="././latbien.mp4" type="video/mp4">
 </video>
 </div>
 
   <div class="gif-bg"></div>
 <video id="fondVideo" class="video-bg" autoplay muted loop playsinline webkit-playsinline preload="auto">
-  <source src="./latbien.mp4" type="video/mp4">
+  <source src="././latbien.mp4" type="video/mp4">
 </video>
 
   <div id="volumeTextWhiteGlow" class="volume-white-glow-layer"></div>
