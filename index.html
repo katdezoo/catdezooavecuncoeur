@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- warning dangerous code -->
+<!-- WEBSITE ORDI START: desktop PC/Mac uses scaled mobile layout -->
 <!-- BEGIN COPYRIGHT NOTICE: © 2026 catdezoo<3. all rights reserved. -->
 
 <html lang="fr">
@@ -7143,111 +7143,6 @@ body {
     }
   }
 </style>
-<style id="rules-end-arrow-smooth-final">
-  /*
-    FLECHE FIN RULES
-    La flèche qui pointe vers le haut est attachée au bas de la box,
-    au même écart du bord que la flèche haute.
-    Elle apparaît seulement quand la fin du texte est atteinte.
-  */
-
-  #apropos {
-    position: fixed !important;
-  }
-
-  #apropos > .magicbox-arrow {
-    position: absolute !important;
-    display: block !important;
-    pointer-events: none !important;
-    z-index: 95 !important;
-    width: clamp(8px, 0.78vw, 13px) !important;
-    height: clamp(8px, 0.78vw, 13px) !important;
-    border-right: clamp(1.5px, 0.15vw, 2.2px) solid #000000 !important;
-    border-bottom: clamp(1.5px, 0.15vw, 2.2px) solid #000000 !important;
-    filter:
-      drop-shadow(0 0 3px rgba(255, 255, 255, 1))
-      drop-shadow(0 0 7px rgba(255, 255, 255, 0.78))
-      drop-shadow(0 0 12px rgba(255, 255, 255, 0.46)) !important;
-    backface-visibility: hidden !important;
-    -webkit-backface-visibility: hidden !important;
-  }
-
-  #apropos > .magicbox-arrow-down {
-    top: clamp(10px, 1.1vw, 16px) !important;
-    right: clamp(16px, 2.1vw, 28px) !important;
-    left: auto !important;
-    bottom: auto !important;
-    margin: 0 !important;
-    opacity: 1 !important;
-    transform: rotate(45deg) translate3d(0, 0, 0) !important;
-  }
-
-  #apropos > .magicbox-arrow-up {
-    top: auto !important;
-    bottom: clamp(10px, 1.1vw, 16px) !important;
-    right: clamp(16px, 2.1vw, 28px) !important;
-    left: auto !important;
-    margin: 0 !important;
-    opacity: 0 !important;
-    transform: rotate(-135deg) translate3d(0, 6px, 0) scale(0.86) !important;
-    transition:
-      opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
-      filter 520ms cubic-bezier(0.22, 1, 0.36, 1) !important;
-    will-change: opacity, transform, filter !important;
-  }
-
-  #apropos.rules-at-end > .magicbox-arrow-up,
-  #apropos.rules-no-scroll > .magicbox-arrow-up {
-    opacity: 1 !important;
-    transform: rotate(-135deg) translate3d(0, 0, 0) scale(1) !important;
-  }
-
-  #apropos.rules-at-end > .magicbox-arrow-up {
-    filter:
-      drop-shadow(0 0 4px rgba(255, 255, 255, 1))
-      drop-shadow(0 0 9px rgba(255, 255, 255, 0.86))
-      drop-shadow(0 0 15px rgba(255, 255, 255, 0.54)) !important;
-  }
-
-  #apropos .card > .magicbox-arrow,
-  #apropos::before,
-  #apropos::after,
-  #apropos .card::before,
-  #apropos .card::after {
-    content: none !important;
-    display: none !important;
-  }
-
-  @media screen and (max-width: 768px) {
-    #apropos > .magicbox-arrow {
-      width: clamp(8px, 2.6vw, 11px) !important;
-      height: clamp(8px, 2.6vw, 11px) !important;
-      border-right-width: clamp(1.5px, 0.55vw, 2px) !important;
-      border-bottom-width: clamp(1.5px, 0.55vw, 2px) !important;
-    }
-
-    #apropos > .magicbox-arrow-down {
-      top: clamp(9px, 3vw, 14px) !important;
-      right: clamp(13px, 5vw, 22px) !important;
-    }
-
-    #apropos > .magicbox-arrow-up {
-      bottom: clamp(9px, 3vw, 15px) !important;
-      right: clamp(13px, 5vw, 22px) !important;
-      transform: rotate(-135deg) translate3d(0, 7px, 0) scale(0.84) !important;
-      transition:
-        opacity 480ms cubic-bezier(0.16, 1, 0.3, 1),
-        transform 620ms cubic-bezier(0.16, 1, 0.3, 1),
-        filter 620ms cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-
-    #apropos.rules-at-end > .magicbox-arrow-up,
-    #apropos.rules-no-scroll > .magicbox-arrow-up {
-      transform: rotate(-135deg) translate3d(0, 0, 0) scale(1) !important;
-    }
-  }
-</style>
 <style id="gpc-timer-desktop-extra-up-final">
   /*
     TIMER ORDI ENCORE PLUS HAUT
@@ -7418,11 +7313,10 @@ body {
     }
   }
 </style>
-<style id="gpc-no-select-no-cursor-final">
+<style id="gpc-ultra-fast-no-select-final">
   /*
-    NO SELECT / NO TEXT CURSOR
-    Empêche la sélection, le curseur texte, le surlignage, le callout mobile
-    et le drag visuel sur tous les objets, sans désactiver les clics.
+    ULTRA FAST NO SELECT
+    CSS only : pas de scan global, pas de boucle DOM.
   */
 
   html,
@@ -7434,58 +7328,14 @@ body {
     -moz-user-select: none !important;
     -ms-user-select: none !important;
     user-select: none !important;
-
     -webkit-touch-callout: none !important;
     -webkit-user-drag: none !important;
     user-drag: none !important;
-
     caret-color: transparent !important;
     cursor: default !important;
-    outline: none !important;
     -webkit-tap-highlight-color: transparent !important;
   }
 
-  /* Tout reste cliquable, mais aucun objet ne prend un curseur texte/main */
-  a,
-  button,
-  label,
-  audio,
-  video,
-  input,
-  input[type="range"],
-  input[type="button"],
-  input[type="submit"],
-  select,
-  textarea,
-  [role="button"],
-  [onclick],
-  .magicbox-arrow,
-  .volume-boost-box,
-  .audio-box,
-  .audio-progress-box,
-  .audio-progress-wrap,
-  .volume-slider-wrap {
-    cursor: default !important;
-    -webkit-user-select: none !important;
-    user-select: none !important;
-    caret-color: transparent !important;
-    -webkit-touch-callout: none !important;
-    -webkit-user-drag: none !important;
-    user-drag: none !important;
-    -webkit-tap-highlight-color: transparent !important;
-  }
-
-  /* Les sliders restent utilisables mais ne sélectionnent rien */
-  input[type="range"]::-webkit-slider-thumb,
-  input[type="range"]::-webkit-slider-runnable-track,
-  input[type="range"]::-moz-range-thumb,
-  input[type="range"]::-moz-range-track {
-    cursor: default !important;
-    -webkit-user-select: none !important;
-    user-select: none !important;
-  }
-
-  /* Pas de sélection visible même en cas de double clic / appui long */
   ::selection {
     background: transparent !important;
     color: inherit !important;
@@ -7496,36 +7346,30 @@ body {
     color: inherit !important;
   }
 
-  img,
-  video,
-  svg,
-  canvas,
-  iframe {
-    -webkit-user-drag: none !important;
-    user-drag: none !important;
-    pointer-events: none;
-  }
-
+  button,
   audio,
   input,
-  button,
+  input[type="range"],
+  label,
   [onclick] {
     pointer-events: auto !important;
+    cursor: default !important;
   }
 
-  @media screen and (max-width: 768px) {
-    html,
-    body,
-    body *,
-    body *::before,
-    body *::after {
-      -webkit-user-select: none !important;
-      user-select: none !important;
-      -webkit-touch-callout: none !important;
-      -webkit-tap-highlight-color: transparent !important;
-      caret-color: transparent !important;
-      cursor: default !important;
-    }
+  #introVideo.intro-video,
+  #introPage #introVideo,
+  #introPage #introGif {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  #copyrightIntroPage,
+  .copyright-intro-page,
+  #introPage,
+  #introPage.intro-page {
+    background: #000000 !important;
   }
 </style>
 <style id="gpc-timer-extra-40px-desktop-final">
@@ -7556,11 +7400,8 @@ body {
 </style>
 <style id="rules-arrows-shape-end-final">
   /*
-    FLECHES RULES FINAL
-    - Flèche haute non déformée, même forme que la flèche basse.
-    - Flèche basse attachée au bas de la box, même écart que la haute.
-    - Flèche basse visible seulement à la fin du texte avec apparition smooth.
-    - Desktop + smartphone.
+    FLECHES RULES FINAL LIGHT
+    Un seul moteur, rapide.
   */
 
   #apropos {
@@ -7583,7 +7424,6 @@ body {
     transform-origin: 50% 50% !important;
     backface-visibility: hidden !important;
     -webkit-backface-visibility: hidden !important;
-    will-change: opacity, transform, filter !important;
     transition:
       opacity 440ms cubic-bezier(0.22, 1, 0.36, 1),
       transform 560ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -7614,10 +7454,6 @@ body {
   #apropos.rules-no-scroll > .magicbox-arrow-up {
     opacity: 1 !important;
     transform: rotate(-135deg) translate3d(0, 0, 0) scale(1) !important;
-    filter:
-      drop-shadow(0 0 4px rgba(255, 255, 255, 1))
-      drop-shadow(0 0 9px rgba(255, 255, 255, 0.86))
-      drop-shadow(0 0 15px rgba(255, 255, 255, 0.54)) !important;
   }
 
   #apropos .card > .magicbox-arrow,
@@ -7642,19 +7478,6 @@ body {
         opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
         transform 640ms cubic-bezier(0.16, 1, 0.3, 1),
         filter 640ms cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-
-    #apropos > .magicbox-arrow-down {
-      transform: rotate(45deg) translate3d(0, 0, 0) scale(1) !important;
-    }
-
-    #apropos > .magicbox-arrow-up {
-      transform: rotate(-135deg) translate3d(0, 7px, 0) scale(0.86) !important;
-    }
-
-    #apropos.rules-at-end > .magicbox-arrow-up,
-    #apropos.rules-no-scroll > .magicbox-arrow-up {
-      transform: rotate(-135deg) translate3d(0, 0, 0) scale(1) !important;
     }
   }
 
@@ -10180,7 +10003,7 @@ body {
     setInterval(couperIntroVideo, 800);
   })();
 </script>
-<script id="rules-end-arrow-smooth-script-final">
+<script id="rules-arrows-end-light-script-final">
   (function() {
     let raf = null;
 
@@ -10195,188 +10018,15 @@ body {
       function prendreOuCreer(classe) {
         const toutes = Array.from(b.querySelectorAll("." + classe));
         const premiere = toutes[0] || document.createElement("span");
-        premiere.className = "magicbox-arrow " + classe;
-        premiere.setAttribute("aria-hidden", "true");
-
-        toutes.slice(1).forEach(function(el) {
-          if (el && el.parentNode) el.parentNode.removeChild(el);
-        });
-
-        return premiere;
-      }
-
-      const down = prendreOuCreer("magicbox-arrow-down");
-      const up = prendreOuCreer("magicbox-arrow-up");
-
-      if (down.parentNode !== b || b.firstChild !== down) {
-        b.insertBefore(down, b.firstChild);
-      }
-
-      if (up.parentNode !== b || b.lastChild !== up) {
-        b.appendChild(up);
-      }
-
-      return b;
-    }
-
-    function verifierFin() {
-      raf = null;
-
-      const b = normaliserFleches();
-      if (!b) return;
-
-      const marge = Math.max(3, Math.round((b.clientHeight || 0) * 0.035));
-      const maxScroll = Math.max(0, b.scrollHeight - b.clientHeight);
-      const noScroll = maxScroll <= marge;
-      const atEnd = noScroll || b.scrollTop >= maxScroll - marge;
-
-      b.classList.toggle("rules-no-scroll", noScroll);
-      b.classList.toggle("rules-at-end", atEnd);
-
-      /* Recalcul explicite si le texte RULES change plus tard */
-      b.style.setProperty("--rules-scrollable-height", String(b.scrollHeight || 0));
-    }
-
-    function demander() {
-      if (raf) return;
-      raf = requestAnimationFrame(verifierFin);
-    }
-
-    window.addEventListener("DOMContentLoaded", demander, { passive: true });
-    window.addEventListener("load", demander, { passive: true });
-    window.addEventListener("pageshow", demander, { passive: true });
-    window.addEventListener("resize", demander, { passive: true });
-    window.addEventListener("orientationchange", function() {
-      setTimeout(demander, 120);
-      setTimeout(demander, 420);
-    }, { passive: true });
-
-    document.addEventListener("click", function(event) {
-      const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
-      if (texte === "RULES") {
-        setTimeout(demander, 40);
-        setTimeout(demander, 240);
-      }
-    }, { passive: true });
-
-    const b0 = normaliserFleches();
-    if (b0 && !b0.dataset.rulesEndArrowOk) {
-      b0.dataset.rulesEndArrowOk = "1";
-      b0.addEventListener("scroll", demander, { passive: true });
-      b0.addEventListener("touchmove", demander, { passive: true });
-      b0.addEventListener("wheel", demander, { passive: true });
-    }
-
-    if ("MutationObserver" in window) {
-      const observer = new MutationObserver(demander);
-      window.addEventListener("DOMContentLoaded", function() {
-        const b = box();
-        if (b) {
-          observer.observe(b, {
-            childList: true,
-            subtree: true,
-            characterData: true
-          });
-        }
-      }, { passive: true });
-    }
-
-    demander();
-  })();
-</script>
-<script id="gpc-no-select-no-cursor-script-final">
-  (function() {
-    function viderSelection() {
-      try {
-        const selection = window.getSelection && window.getSelection();
-        if (selection && selection.removeAllRanges) {
-          selection.removeAllRanges();
-        }
-      } catch (e) {}
-    }
-
-    function verrouillerObjet(el) {
-      if (!el || !el.setAttribute) return;
-
-      try { el.setAttribute("draggable", "false"); } catch (e) {}
-      try { el.style.setProperty("user-select", "none", "important"); } catch (e) {}
-      try { el.style.setProperty("-webkit-user-select", "none", "important"); } catch (e) {}
-      try { el.style.setProperty("-webkit-touch-callout", "none", "important"); } catch (e) {}
-      try { el.style.setProperty("caret-color", "transparent", "important"); } catch (e) {}
-      try { el.style.setProperty("cursor", "default", "important"); } catch (e) {}
-    }
-
-    function verrouillerTout() {
-      document.documentElement.setAttribute("draggable", "false");
-      if (document.body) {
-        verrouillerObjet(document.body);
-      }
-
-      document.querySelectorAll("body, body *").forEach(verrouillerObjet);
-      viderSelection();
-    }
-
-    ["DOMContentLoaded", "load", "pageshow", "resize", "orientationchange"].forEach(function(nom) {
-      window.addEventListener(nom, function() {
-        setTimeout(verrouillerTout, 20);
-        setTimeout(verrouillerTout, 220);
-      }, { passive: true });
-    });
-
-    document.addEventListener("selectionchange", viderSelection, { passive: true });
-
-    document.addEventListener("mousedown", function() {
-      setTimeout(viderSelection, 0);
-    }, { passive: true });
-
-    document.addEventListener("mouseup", viderSelection, { passive: true });
-    document.addEventListener("touchend", viderSelection, { passive: true });
-    document.addEventListener("contextmenu", viderSelection, { passive: true });
-
-    if ("MutationObserver" in window) {
-      const observer = new MutationObserver(function() {
-        verrouillerTout();
-      });
-
-      window.addEventListener("DOMContentLoaded", function() {
-        if (document.body) {
-          observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ["style", "class", "draggable"]
-          });
-        }
-      }, { passive: true });
-    }
-
-    verrouillerTout();
-  })();
-</script>
-<script id="rules-arrows-end-robust-script-final">
-  (function() {
-    let raf = null;
-    let observer = null;
-
-    function box() {
-      return document.getElementById("apropos");
-    }
-
-    function normaliserFleches() {
-      const b = box();
-      if (!b) return null;
-
-      function prendreOuCreer(classe) {
-        const toutes = Array.from(b.querySelectorAll("." + classe));
-        const premiere = toutes[0] || document.createElement("span");
-
         premiere.className = "magicbox-arrow " + classe;
         premiere.setAttribute("aria-hidden", "true");
         try { premiere.setAttribute("draggable", "false"); } catch (e) {}
 
-        toutes.slice(1).forEach(function(el) {
-          if (el && el.parentNode) el.parentNode.removeChild(el);
-        });
+        for (let i = 1; i < toutes.length; i += 1) {
+          if (toutes[i] && toutes[i].parentNode) {
+            toutes[i].parentNode.removeChild(toutes[i]);
+          }
+        }
 
         return premiere;
       }
@@ -10397,20 +10047,18 @@ body {
 
     function verifierFin() {
       raf = null;
-
       const b = normaliserFleches();
       if (!b) return;
 
-      const hauteurVisible = b.clientHeight || 0;
-      const hauteurTotale = b.scrollHeight || 0;
-      const marge = Math.max(4, Math.round(hauteurVisible * 0.045));
-      const maxScroll = Math.max(0, hauteurTotale - hauteurVisible);
+      const visible = b.clientHeight || 0;
+      const total = b.scrollHeight || 0;
+      const marge = Math.max(4, Math.round(visible * 0.045));
+      const maxScroll = Math.max(0, total - visible);
       const noScroll = maxScroll <= marge;
       const atEnd = noScroll || (b.scrollTop || 0) >= maxScroll - marge;
 
       b.classList.toggle("rules-no-scroll", noScroll);
       b.classList.toggle("rules-at-end", atEnd);
-      b.style.setProperty("--rules-scrollable-height", String(hauteurTotale));
     }
 
     function demander() {
@@ -10422,21 +10070,11 @@ body {
       const b = normaliserFleches();
       if (!b) return;
 
-      if (!b.dataset.rulesArrowEndRobustOk) {
-        b.dataset.rulesArrowEndRobustOk = "1";
+      if (!b.dataset.rulesArrowEndLightOk) {
+        b.dataset.rulesArrowEndLightOk = "1";
         b.addEventListener("scroll", demander, { passive: true });
         b.addEventListener("wheel", demander, { passive: true });
-        b.addEventListener("touchmove", demander, { passive: true });
         b.addEventListener("touchend", demander, { passive: true });
-      }
-
-      if ("MutationObserver" in window && !observer) {
-        observer = new MutationObserver(demander);
-        observer.observe(b, {
-          childList: true,
-          subtree: true,
-          characterData: true
-        });
       }
 
       demander();
@@ -10462,11 +10100,49 @@ body {
       }
     }, { passive: true });
 
-    setInterval(demander, 900);
     brancher();
+  })();
+</script>
+<script id="gpc-ultra-fast-selection-light-final">
+  (function() {
+    function viderSelection() {
+      try {
+        const selection = window.getSelection && window.getSelection();
+        if (selection && selection.removeAllRanges) {
+          selection.removeAllRanges();
+        }
+      } catch (e) {}
+    }
+
+    function couperIntroVideo() {
+      const introVideo = document.getElementById("introVideo");
+      const introGif = document.getElementById("introGif");
+
+      if (introVideo) {
+        try { introVideo.pause(); } catch (e) {}
+        introVideo.style.display = "none";
+        introVideo.style.opacity = "0";
+        introVideo.style.visibility = "hidden";
+      }
+
+      if (introGif) {
+        introGif.style.display = "none";
+        introGif.style.opacity = "0";
+        introGif.style.visibility = "hidden";
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", couperIntroVideo, { passive: true });
+    window.addEventListener("load", couperIntroVideo, { passive: true });
+    window.addEventListener("pageshow", couperIntroVideo, { passive: true });
+    document.addEventListener("selectionchange", viderSelection, { passive: true });
+    document.addEventListener("mouseup", viderSelection, { passive: true });
+    document.addEventListener("touchend", viderSelection, { passive: true });
+
+    couperIntroVideo();
   })();
 </script>
 </body>
 <!-- END COPYRIGHT NOTICE: © 2026 catdezoo<3. all rights reserved. -->
-<!-- warning dangerous code -->
+<!-- WEBSITE ORDI END: desktop PC/Mac replaced by scaled mobile layout -->
 </html>
