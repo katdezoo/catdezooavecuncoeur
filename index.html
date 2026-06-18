@@ -4562,6 +4562,48 @@
       }
     }
 
+  
+    /* Smartphone : @gmail plus bas et verrouillé sur la page */
+    @media screen and (max-width: 768px) {
+      #contact {
+        position: fixed !important;
+        left: 50% !important;
+        top: var(--gmail-page-locked-top, 76vh) !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        pointer-events: none !important;
+        z-index: 99998 !important;
+        will-change: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+
+      #contact.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      #contact .card,
+      #contact h1 {
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #contact {
+        top: var(--gmail-page-locked-top, 70vh) !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -5399,6 +5441,41 @@
     window.addEventListener("DOMContentLoaded", poserGmailStatique, { passive: true });
     window.addEventListener("orientationchange", function() {
       setTimeout(poserGmailStatique, 250);
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (function() {
+    function verrouillerGmailPlusBas() {
+      if (window.innerWidth > 768) {
+        document.documentElement.style.removeProperty("--gmail-page-locked-top");
+        return;
+      }
+
+      const paysage = window.innerWidth <= 900 && window.innerHeight <= 500 && window.matchMedia("(orientation: landscape)").matches;
+      const hauteurDepart = window.innerHeight;
+
+      /* Plus bas que la version précédente : 76% de la hauteur en portrait */
+      const position = paysage
+        ? Math.round(hauteurDepart * 0.70)
+        : Math.round(hauteurDepart * 0.76);
+
+      document.documentElement.style.setProperty("--gmail-page-locked-top", position + "px");
+
+      /* Nettoyage des anciennes variables qui pouvaient encore influencer @gmail */
+      document.documentElement.style.removeProperty("--contact-smooth-top");
+      document.documentElement.style.removeProperty("--gmail-fixed-top");
+      document.documentElement.style.removeProperty("--gmail-fixed-page-top");
+      document.documentElement.style.removeProperty("--gmail-static-top");
+    }
+
+    verrouillerGmailPlusBas();
+
+    window.addEventListener("DOMContentLoaded", verrouillerGmailPlusBas, { passive: true });
+    window.addEventListener("orientationchange", function() {
+      setTimeout(verrouillerGmailPlusBas, 250);
     }, { passive: true });
   })();
 </script>
