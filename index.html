@@ -6382,30 +6382,167 @@ body {
   })();
 </script>
 
-<script>
-  (function() {
-    function debloquerScrollRules() {
-      const box = document.getElementById("apropos");
-      if (!box || box.dataset.scrollRulesOk) return;
-
-      box.dataset.scrollRulesOk = "1";
-      box.style.overflowY = "auto";
-      box.style.webkitOverflowScrolling = "touch";
-      box.style.touchAction = "pan-y";
-      box.style.pointerEvents = "auto";
-
-      box.addEventListener("touchmove", function(event) {
-        event.stopPropagation();
-      }, { passive: true });
-
-      box.addEventListener("wheel", function(event) {
-        event.stopPropagation();
-      }, { passive: true });
+<style id="rules-scroll-restore-final">
+  /* RESTAURATION FINALE : magicbox smartphone scrollable, petite, effets conservés */
+  @media screen and (max-width: 768px) {
+    html,
+    body {
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      overscroll-behavior-y: auto !important;
+      touch-action: auto !important;
     }
 
-    window.addEventListener("DOMContentLoaded", debloquerScrollRules);
-    window.addEventListener("load", debloquerScrollRules);
-    window.addEventListener("pageshow", debloquerScrollRules);
+    body {
+      min-height: 100vh !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    .overlay {
+      min-height: 100vh !important;
+      background: transparent !important;
+      pointer-events: auto !important;
+    }
+
+    #fondVideo.video-bg,
+    #introVideo.intro-video {
+      pointer-events: none !important;
+      z-index: 1 !important;
+    }
+
+    nav {
+      z-index: 30000 !important;
+      pointer-events: auto !important;
+    }
+
+    #apropos {
+      position: fixed !important;
+      left: 50% !important;
+      bottom: auto !important;
+      margin: 0 !important;
+
+      width: calc(100vw - 24px) !important;
+      max-width: calc(100vw - 24px) !important;
+      min-height: 96px !important;
+      max-height: none !important;
+      padding: 30px 12px !important;
+
+      box-sizing: border-box !important;
+      overflow-y: scroll !important;
+      overflow-x: hidden !important;
+      -webkit-overflow-scrolling: touch !important;
+      overscroll-behavior-y: auto !important;
+      overscroll-behavior-x: contain !important;
+      touch-action: pan-y pinch-zoom !important;
+      pointer-events: auto !important;
+
+      scrollbar-width: none !important;
+      z-index: 16000 !important;
+      transform: translate3d(-50%, 0, 0) !important;
+      will-change: auto !important;
+      contain: none !important;
+      backface-visibility: hidden !important;
+    }
+
+    #apropos::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    #apropos.active {
+      display: block !important;
+      pointer-events: auto !important;
+    }
+
+    #apropos .card {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
+      transform: translateZ(0) !important;
+      pointer-events: auto !important;
+    }
+
+    #apropos h1 {
+      font-size: clamp(15px, 4.6vw, 21px) !important;
+      line-height: 1.22 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      text-align: center !important;
+      pointer-events: auto !important;
+    }
+  }
+</style>
+<script id="rules-scroll-restore-script">
+  (function() {
+    function reglerRulesBoxCommeAvant() {
+      const box = document.getElementById("apropos");
+      if (!box) return;
+
+      const largeur = window.innerWidth || document.documentElement.clientWidth || 390;
+      const hauteur = window.innerHeight || document.documentElement.clientHeight || 760;
+
+      if (largeur > 768) {
+        box.style.removeProperty("top");
+        box.style.removeProperty("height");
+        box.style.removeProperty("overflow-y");
+        box.style.removeProperty("touch-action");
+        return;
+      }
+
+      const paysage = largeur <= 900 && hauteur <= 500 && window.matchMedia("(orientation: landscape)").matches;
+      const grandSmartphone = largeur <= 430 && hauteur >= 760 && !paysage;
+
+      const ratioTop = paysage ? 0.50 : grandSmartphone ? 0.62 : 0.60;
+      const margeBas = paysage ? 120 : 205;
+      const hauteurMin = paysage ? 78 : grandSmartphone ? 100 : 96;
+
+      const petiteDescente = Math.max(8, Math.min(Math.round(hauteur * 0.018), 18));
+      const top = Math.round(hauteur * ratioTop) + petiteDescente;
+      const hauteurBox = Math.max(hauteurMin, Math.round(hauteur - Math.round(hauteur * ratioTop) - margeBas));
+
+      box.style.setProperty("top", top + "px", "important");
+      box.style.setProperty("height", hauteurBox + "px", "important");
+      box.style.setProperty("width", "calc(100vw - 24px)", "important");
+      box.style.setProperty("max-width", "calc(100vw - 24px)", "important");
+      box.style.setProperty("padding", paysage ? "24px 10px" : "30px 12px", "important");
+      box.style.setProperty("overflow-y", "scroll", "important");
+      box.style.setProperty("-webkit-overflow-scrolling", "touch", "important");
+      box.style.setProperty("touch-action", "pan-y pinch-zoom", "important");
+      box.style.setProperty("pointer-events", "auto", "important");
+      box.style.setProperty("transform", "translate3d(-50%, 0, 0)", "important");
+    }
+
+    function brancherRulesSansBloquerGestes() {
+      const box = document.getElementById("apropos");
+      if (!box || box.dataset.rulesScrollRestoreOk) return;
+      box.dataset.rulesScrollRestoreOk = "1";
+
+      /* Important : aucun preventDefault / stopPropagation ici.
+         Comme ça, le scroll interne fonctionne ET le navigateur peut encore rafraîchir/quitter normalement. */
+      box.addEventListener("touchstart", function() {}, { passive: true });
+      box.addEventListener("touchmove", function() {}, { passive: true });
+      box.addEventListener("wheel", function() {}, { passive: true });
+    }
+
+    function appliquer() {
+      reglerRulesBoxCommeAvant();
+      brancherRulesSansBloquerGestes();
+    }
+
+    window.addEventListener("DOMContentLoaded", appliquer);
+    window.addEventListener("load", appliquer);
+    window.addEventListener("pageshow", appliquer);
+    window.addEventListener("resize", appliquer, { passive: true });
+    window.addEventListener("orientationchange", function() {
+      setTimeout(appliquer, 250);
+    }, { passive: true });
+
+    document.addEventListener("click", function(event) {
+      if (event.target && event.target.textContent && event.target.textContent.trim() === "RULES") {
+        setTimeout(appliquer, 60);
+      }
+    }, { passive: true });
   })();
 </script>
 </body>
