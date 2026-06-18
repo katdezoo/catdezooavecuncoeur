@@ -4048,6 +4048,164 @@
       }
     }
 
+  
+    /* MAGICBOX : scroll encore plus fluide + flèches intégrées */
+    @media screen and (max-width: 768px) {
+      #apropos {
+        position: fixed !important;
+        left: 50% !important;
+        top: var(--magicbox-top, 60dvh) !important;
+        bottom: auto !important;
+        height: var(--magicbox-height, calc(100dvh - 60dvh - 205px - env(safe-area-inset-bottom))) !important;
+        min-height: 96px !important;
+        max-height: none !important;
+        transform: translate3d(-50%, 0, 0) !important;
+        width: calc(100vw - 24px) !important;
+        max-width: calc(100vw - 24px) !important;
+        padding: 30px 12px 30px 12px !important;
+        box-sizing: border-box !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior: contain !important;
+        contain: layout paint style !important;
+        backface-visibility: hidden !important;
+        will-change: top, height !important;
+        z-index: 16000 !important;
+      }
+
+      #apropos.active {
+        display: block !important;
+        pointer-events: auto !important;
+      }
+
+      #apropos .card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        contain: paint !important;
+        transform: translateZ(0) !important;
+      }
+
+      /* On coupe les anciennes flèches fixes pour éviter les doublons */
+      #apropos::before,
+      #apropos::after {
+        display: none !important;
+      }
+
+      /* Flèches intégrées dans le contenu de la magicbox */
+      #apropos .card::before,
+      #apropos .card::after {
+        content: "";
+        display: block !important;
+        position: relative !important;
+        width: 10px !important;
+        height: 10px !important;
+        border-right: 2px solid #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+        filter:
+          drop-shadow(0 0 3px rgba(255, 255, 255, 0.95))
+          drop-shadow(0 0 7px rgba(255, 255, 255, 0.72)) !important;
+        pointer-events: none !important;
+        z-index: 4 !important;
+        opacity: 1 !important;
+        will-change: transform !important;
+      }
+
+      /* Haut du texte, à droite : flèche vers le bas */
+      #apropos .card::before {
+        margin: 0 14px 12px auto !important;
+        transform: translate3d(0, 0, 0) rotate(45deg) !important;
+      }
+
+      /* Fin du texte : flèche vers le haut */
+      #apropos .card::after {
+        margin: 12px auto 0 auto !important;
+        transform: translate3d(0, 0, 0) rotate(-135deg) !important;
+      }
+
+      /* @gmail reste fixe, séparé du mouvement de la magicbox */
+      #contact {
+        position: fixed !important;
+        left: 50% !important;
+        top: var(--gmail-fixed-top, 68vh) !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        pointer-events: none !important;
+        z-index: 16500 !important;
+        will-change: auto !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: var(--gmail-fixed-top, 68dvh) !important;
+        }
+      }
+
+      #contact.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #apropos {
+        min-height: 100px !important;
+      }
+
+      #apropos .card::before,
+      #apropos .card::after {
+        width: 9px !important;
+        height: 9px !important;
+      }
+
+      #apropos .card::before {
+        margin-right: 12px !important;
+        margin-bottom: 11px !important;
+      }
+
+      #apropos .card::after {
+        margin-top: 11px !important;
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #apropos {
+        min-height: 78px !important;
+        padding: 24px 10px 24px 10px !important;
+      }
+
+      #apropos .card::before,
+      #apropos .card::after {
+        width: 8px !important;
+        height: 8px !important;
+        border-right-width: 1.5px !important;
+        border-bottom-width: 1.5px !important;
+      }
+
+      #apropos .card::before {
+        margin-right: 10px !important;
+        margin-bottom: 8px !important;
+      }
+
+      #apropos .card::after {
+        margin-top: 8px !important;
+      }
+
+      #contact {
+        top: var(--gmail-fixed-top, 62vh) !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -4693,41 +4851,13 @@
 
 <script>
   (function() {
-    function fixerGmailUneFois() {
-      if (window.innerWidth > 768) {
-        document.documentElement.style.removeProperty("--gmail-fixed-top");
-        return;
-      }
-
-      const hauteur = window.innerHeight;
-      const paysage = window.innerWidth <= 900 && window.innerHeight <= 500 && window.matchMedia("(orientation: landscape)").matches;
-
-      const positionGmail = paysage
-        ? Math.round(hauteur * 0.62)
-        : Math.round(hauteur * 0.68);
-
-      document.documentElement.style.setProperty("--gmail-fixed-top", positionGmail + "px");
-      document.documentElement.style.removeProperty("--contact-smooth-top");
-    }
-
-    fixerGmailUneFois();
-    window.addEventListener("DOMContentLoaded", fixerGmailUneFois);
-    window.addEventListener("orientationchange", function() {
-      setTimeout(fixerGmailUneFois, 250);
-    });
-  })();
-</script>
-
-
-<script>
-  (function() {
     const racine = document.documentElement;
 
     let topActuel = null;
+    let hauteurActuelle = null;
     let topCible = null;
-    let bottomCible = 205;
-    let animation = null;
-    let majDemandee = false;
+    let hauteurCible = null;
+    let raf = null;
 
     function estSmartphone() {
       return window.innerWidth <= 768;
@@ -4739,13 +4869,15 @@
         : window.innerHeight;
     }
 
-    function definirCible() {
+    function calculerCiblesMagicbox() {
       if (!estSmartphone()) {
-        racine.style.removeProperty("--exemple-box-smooth-top");
-        racine.style.removeProperty("--exemple-box-smooth-bottom");
-        animation = null;
+        racine.style.removeProperty("--magicbox-top");
+        racine.style.removeProperty("--magicbox-height");
+        raf = null;
         topActuel = null;
+        hauteurActuelle = null;
         topCible = null;
+        hauteurCible = null;
         return;
       }
 
@@ -4754,69 +4886,104 @@
       const grandSmartphone = window.innerWidth <= 430 && window.innerHeight >= 760 && !paysage;
 
       const ratioTop = paysage ? 0.50 : grandSmartphone ? 0.62 : 0.60;
+      const margeBas = paysage ? 120 : 205;
+      const hauteurMin = paysage ? 78 : grandSmartphone ? 100 : 96;
 
       topCible = Math.round(h * ratioTop);
-      bottomCible = paysage ? 120 : 205;
+      hauteurCible = Math.max(hauteurMin, Math.round(h - topCible - margeBas));
 
       if (topActuel === null) {
         topActuel = topCible;
-        racine.style.setProperty("--exemple-box-smooth-top", topActuel + "px");
-        racine.style.setProperty("--exemple-box-smooth-bottom", bottomCible + "px");
+        hauteurActuelle = hauteurCible;
+        racine.style.setProperty("--magicbox-top", topActuel + "px");
+        racine.style.setProperty("--magicbox-height", hauteurActuelle + "px");
       }
 
-      if (!animation) {
-        animation = requestAnimationFrame(animer);
+      if (!raf) {
+        raf = requestAnimationFrame(animerMagicbox);
       }
     }
 
-    function animer() {
-      if (!estSmartphone() || topCible === null || topActuel === null) {
-        animation = null;
+    function animerMagicbox() {
+      if (!estSmartphone() || topCible === null || hauteurCible === null) {
+        raf = null;
         return;
       }
 
-      const distance = topCible - topActuel;
+      const douceur = 0.062;
+      const stop = 0.10;
 
-      if (Math.abs(distance) < 0.12) {
+      const deltaTop = topCible - topActuel;
+      const deltaHauteur = hauteurCible - hauteurActuelle;
+
+      if (Math.abs(deltaTop) < stop) {
         topActuel = topCible;
       } else {
-        topActuel += distance * 0.085;
+        topActuel += deltaTop * douceur;
       }
 
-      racine.style.setProperty("--exemple-box-smooth-top", topActuel.toFixed(2) + "px");
-      racine.style.setProperty("--exemple-box-smooth-bottom", bottomCible + "px");
+      if (Math.abs(deltaHauteur) < stop) {
+        hauteurActuelle = hauteurCible;
+      } else {
+        hauteurActuelle += deltaHauteur * douceur;
+      }
+
+      racine.style.setProperty("--magicbox-top", topActuel.toFixed(2) + "px");
+      racine.style.setProperty("--magicbox-height", hauteurActuelle.toFixed(2) + "px");
+
+      /* Sécurité : @gmail ne suit jamais la magicbox */
       racine.style.removeProperty("--contact-smooth-top");
+      racine.style.removeProperty("--exemple-box-smooth-top");
+      racine.style.removeProperty("--exemple-box-smooth-bottom");
 
-      if (topActuel !== topCible || majDemandee) {
-        majDemandee = false;
-        animation = requestAnimationFrame(animer);
+      if (topActuel !== topCible || hauteurActuelle !== hauteurCible) {
+        raf = requestAnimationFrame(animerMagicbox);
       } else {
-        animation = null;
+        raf = null;
       }
     }
 
-    function demanderMaj() {
-      majDemandee = true;
-
-      if (!animation) {
-        requestAnimationFrame(definirCible);
-      } else {
-        definirCible();
-      }
+    function demanderMagicbox() {
+      requestAnimationFrame(calculerCiblesMagicbox);
     }
 
-    definirCible();
+    calculerCiblesMagicbox();
 
-    window.addEventListener("DOMContentLoaded", demanderMaj, { passive: true });
-    window.addEventListener("resize", demanderMaj, { passive: true });
+    window.addEventListener("DOMContentLoaded", demanderMagicbox, { passive: true });
+    window.addEventListener("resize", demanderMagicbox, { passive: true });
     window.addEventListener("orientationchange", function() {
-      setTimeout(demanderMaj, 250);
+      setTimeout(demanderMagicbox, 250);
     }, { passive: true });
 
     if (window.visualViewport) {
-      window.visualViewport.addEventListener("resize", demanderMaj, { passive: true });
-      window.visualViewport.addEventListener("scroll", demanderMaj, { passive: true });
+      window.visualViewport.addEventListener("resize", demanderMagicbox, { passive: true });
+      window.visualViewport.addEventListener("scroll", demanderMagicbox, { passive: true });
     }
+  })();
+</script>
+
+
+<script>
+  (function() {
+    function fixerGmailMagicbox() {
+      if (window.innerWidth > 768) {
+        document.documentElement.style.removeProperty("--gmail-fixed-top");
+        return;
+      }
+
+      const h = window.innerHeight;
+      const paysage = window.innerWidth <= 900 && window.innerHeight <= 500 && window.matchMedia("(orientation: landscape)").matches;
+      const position = paysage ? Math.round(h * 0.62) : Math.round(h * 0.68);
+
+      document.documentElement.style.setProperty("--gmail-fixed-top", position + "px");
+      document.documentElement.style.removeProperty("--contact-smooth-top");
+    }
+
+    fixerGmailMagicbox();
+    window.addEventListener("DOMContentLoaded", fixerGmailMagicbox, { passive: true });
+    window.addEventListener("orientationchange", function() {
+      setTimeout(fixerGmailMagicbox, 250);
+    }, { passive: true });
   })();
 </script>
 
