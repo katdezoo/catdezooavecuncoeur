@@ -6483,8 +6483,8 @@ body {
       return window.innerWidth || document.documentElement.clientWidth || 390;
     }
 
-    function clamp(valeur, min, max) {
-      return Math.max(min, Math.min(max, valeur));
+    function clamp(v, min, max) {
+      return Math.max(min, Math.min(max, v));
     }
 
     function maxPageScroll() {
@@ -6501,21 +6501,24 @@ body {
     }
 
     function topLecteur() {
-      const h = hauteurViewportStable();
+      const hauteur = hauteurViewportStable();
       const lecteur = document.querySelector(".audio-box");
+
       if (lecteur) {
         const rect = lecteur.getBoundingClientRect();
-        if (rect && rect.top > 0 && rect.top < h) {
+        if (rect && rect.top > 0 && rect.top < hauteur) {
           return rect.top;
         }
       }
-      return h - 178;
+
+      /* Fallback proche de l'emplacement réel du lecteur sur smartphone */
+      return hauteur - 170;
     }
 
     function appliquerStylesFixes(box, paysage) {
       box.style.setProperty("width", "calc(100vw - 24px)", "important");
       box.style.setProperty("max-width", "calc(100vw - 24px)", "important");
-      box.style.setProperty("padding", paysage ? "22px 10px" : "28px 14px", "important");
+      box.style.setProperty("padding", paysage ? "22px 10px" : "26px 13px", "important");
       box.style.setProperty("overflow-y", "auto", "important");
       box.style.setProperty("overflow-x", "hidden", "important");
       box.style.setProperty("-webkit-overflow-scrolling", "touch", "important");
@@ -6547,25 +6550,27 @@ body {
       const paysage = largeur <= 900 && hauteur <= 500 && window.matchMedia("(orientation: landscape)").matches;
       const p = progressionPage();
 
-      /* Bas protégé : la box ne vient pas toucher le lecteur. */
+      /* Bas ancré juste au-dessus du lecteur : la box ne touche pas le player. */
       const margeLecteur = paysage ? 8 : 14;
-      const basMax = Math.round(topLecteur() - margeLecteur);
+      const basFixe = Math.round(topLecteur() - margeLecteur);
 
-      /* Haut minimal : la box peut grandir vers le haut, mais elle reste sous le bandeau vidéo. */
-      const hautMin = Math.round(hauteur * (paysage ? 0.40 : 0.47));
+      /* Limite haute : la box reste sous la barre/bandeau de la vidéo. */
+      const hautSousBandeau = Math.round(hauteur * (paysage ? 0.42 : 0.545));
 
-      /* Au départ : plus petite. En bas de scroll : plus grande.
-         Le bas reste verrouillé juste au-dessus du lecteur, donc elle grandit vers le haut. */
-      const hauteurDepart = Math.round(clamp(hauteur * (paysage ? 0.20 : 0.155), paysage ? 70 : 108, paysage ? 118 : 146));
-      const hauteurFinIdeale = Math.round(clamp(hauteur * (paysage ? 0.36 : 0.315), paysage ? 118 : 206, paysage ? 190 : 292));
-      const hauteurMaxPossible = Math.max(hauteurDepart, basMax - hautMin);
-      const hauteurFin = Math.max(hauteurDepart, Math.min(hauteurFinIdeale, hauteurMaxPossible));
+      /* Petite au début, puis croissance au scroll. */
+      const hauteurPetite = Math.round(clamp(hauteur * (paysage ? 0.18 : 0.135), paysage ? 60 : 86, paysage ? 108 : 118));
+      const hauteurGrandeVoulue = Math.round(clamp(hauteur * (paysage ? 0.34 : 0.255), paysage ? 110 : 168, paysage ? 178 : 228));
 
-      hauteurCible = Math.round(hauteurDepart + (hauteurFin - hauteurDepart) * p);
-      topCible = Math.round(basMax - hauteurCible);
+      /* Elle grandit vers le haut, mais ne remonte jamais dans le bandeau vidéo. */
+      const hauteurMaxSansToucherBandeau = Math.max(hauteurPetite, basFixe - hautSousBandeau);
+      const hauteurGrande = Math.max(hauteurPetite, Math.min(hauteurGrandeVoulue, hauteurMaxSansToucherBandeau));
+
+      hauteurCible = Math.round(hauteurPetite + (hauteurGrande - hauteurPetite) * p);
+      topCible = Math.round(basFixe - hauteurCible);
 
       appliquerStylesFixes(box, paysage);
 
+      /* Le scroll de page donne l'agrandissement, et le scroll interne suit doucement le contenu. */
       if (!syncScroll && rulesActive()) {
         syncScroll = true;
         box.scrollTop = p * maxBoxScroll(box);
@@ -6593,7 +6598,7 @@ body {
         return;
       }
 
-      /* Même effet smooth : la taille ET la position glissent ensemble. */
+      /* Même signature smooth que les versions validées. */
       const douceur = 0.045;
       const stop = 0.12;
 
@@ -6630,13 +6635,15 @@ body {
       const progress = clamp(box.scrollTop / maxBoxScroll(box), 0, 1);
       window.scrollTo({ top: progress * maxPageScroll(), left: 0, behavior: "auto" });
       syncScroll = false;
+
       calculerCiblesMagicboxFluide();
     }
 
     function brancherRulesSansBloquerGestes() {
       const box = boxRules();
-      if (!box || box.dataset.rulesGrowSmoothOk) return;
-      box.dataset.rulesGrowSmoothOk = "1";
+      if (!box || box.dataset.rulesGrowStableOk) return;
+      box.dataset.rulesGrowStableOk = "1";
+
       box.addEventListener("scroll", synchroniserPageDepuisBox, { passive: true });
       box.addEventListener("touchstart", function() {}, { passive: true });
       box.addEventListener("touchmove", function() {}, { passive: true });
@@ -7374,22 +7381,16 @@ body {
 </script>
 
 <style id="rules-page-free-scroll-final">
-  /* RULES : scroll libre, barre fine, grande amplitude, vidéo étirée sous la page */
+  /* RULES : scroll libre avec barre fine, sans modifier la vidéo */
   @media screen and (max-width: 768px) {
     html.rules-page-scroll-mode,
     html.rules-page-scroll-mode body {
-      min-height: calc(100vh + var(--rules-page-scroll-extra, 620px)) !important;
+      min-height: calc(100vh + var(--rules-page-scroll-extra, 520px)) !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       scrollbar-width: thin !important;
       scrollbar-color: rgba(255, 255, 255, 0.58) transparent !important;
       background: #000000 !important;
-    }
-
-    html.rules-page-scroll-mode #fondVideo.video-bg {
-      height: calc(var(--gpc-fixed-h, 100vh) + var(--rules-video-scroll-extra, 620px)) !important;
-      min-height: calc(var(--gpc-fixed-h, 100vh) + var(--rules-video-scroll-extra, 620px)) !important;
-      object-fit: fill !important;
     }
 
     html.rules-page-scroll-mode::-webkit-scrollbar,
@@ -7460,15 +7461,12 @@ body {
 
       if (!actif) {
         racine.style.removeProperty("--rules-page-scroll-extra");
-        racine.style.removeProperty("--rules-video-scroll-extra");
         dernierEtatActif = false;
         return;
       }
 
-      /* Amplitude volontairement plus grande : la box a le temps de grandir doucement. */
-      const extra = Math.max(560, Math.min(880, (box.scrollHeight || 260) + 470));
+      const extra = Math.max(460, Math.min(760, (box.scrollHeight || 260) + 390));
       racine.style.setProperty("--rules-page-scroll-extra", extra + "px");
-      racine.style.setProperty("--rules-video-scroll-extra", extra + "px");
 
       if (!dernierEtatActif) {
         window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -7519,12 +7517,14 @@ body {
 
     function configurer(v) {
       if (!v) return;
+
       v.muted = true;
       v.defaultMuted = true;
       v.loop = true;
       v.autoplay = true;
       v.playsInline = true;
       v.preload = "auto";
+
       v.setAttribute("muted", "");
       v.setAttribute("loop", "");
       v.setAttribute("autoplay", "");
@@ -7535,7 +7535,7 @@ body {
       const source = v.querySelector("source");
       if (source && !source.getAttribute("src").includes(SRC.replace("./", ""))) {
         source.setAttribute("src", SRC);
-        v.load();
+        try { v.load(); } catch (e) {}
       }
     }
 
@@ -7552,12 +7552,12 @@ body {
     function reveilDoux(v) {
       const maintenant = Date.now();
       if (!v || maintenant - dernierCorrectif < 900) return;
+
       dernierCorrectif = maintenant;
 
       try {
         if (Number.isFinite(v.duration) && v.duration > 0) {
-          const prochain = Math.min(v.duration - 0.08, Math.max(0.02, v.currentTime + 0.045));
-          v.currentTime = prochain;
+          v.currentTime = Math.min(v.duration - 0.08, Math.max(0.02, v.currentTime + 0.045));
         } else {
           v.currentTime = Math.max(0.02, v.currentTime + 0.045);
         }
@@ -7568,13 +7568,11 @@ body {
 
     function rechargeDouce(v) {
       if (!v || rechargeEnCours) return;
-      rechargeEnCours = true;
 
+      rechargeEnCours = true;
       const position = Number.isFinite(v.currentTime) ? v.currentTime : 0;
 
-      try {
-        v.load();
-      } catch (e) {}
+      try { v.load(); } catch (e) {}
 
       const reprendre = function() {
         try {
@@ -7582,7 +7580,9 @@ body {
             v.currentTime = Math.min(Math.max(0.02, position), Math.max(0.02, v.duration - 0.12));
           }
         } catch (e) {}
+
         play(v);
+
         setTimeout(function() {
           rechargeEnCours = false;
         }, 450);
@@ -7620,11 +7620,13 @@ body {
         relancer(true);
       } else {
         const t = v.currentTime || 0;
+
         if (dernierTemps >= 0 && Math.abs(t - dernierTemps) < 0.012) {
           compteurBloque += 1;
         } else {
           compteurBloque = 0;
         }
+
         dernierTemps = t;
       }
 
