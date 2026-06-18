@@ -4357,6 +4357,71 @@
       }
     }
 
+  
+    /* Smartphone : @gmail fixé sur la page, indépendant de la magicbox */
+    @media screen and (max-width: 768px) {
+      #contact {
+        position: fixed !important;
+        left: 50% !important;
+        top: var(--gmail-fixed-page-top, 68vh) !important;
+        bottom: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 12px !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        pointer-events: none !important;
+        z-index: 99998 !important;
+        will-change: auto !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: var(--gmail-fixed-page-top, 68dvh) !important;
+        }
+      }
+
+      #contact.active {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+      #contact .card {
+        margin: 0 auto !important;
+        padding: 6px 8px !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      #contact h1 {
+        margin: 0 !important;
+        font-size: clamp(25px, 8.4vw, 36px) !important;
+        line-height: 1.05 !important;
+      }
+    }
+
+    @media screen and (max-width: 430px) and (min-height: 760px) {
+      #contact {
+        top: var(--gmail-fixed-page-top, 68vh) !important;
+      }
+
+      @supports (height: 100dvh) {
+        #contact {
+          top: var(--gmail-fixed-page-top, 68dvh) !important;
+        }
+      }
+    }
+
+    @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+      #contact {
+        top: var(--gmail-fixed-page-top, 62vh) !important;
+      }
+    }
+
   </style>
 
 </head>
@@ -5137,6 +5202,34 @@
     window.addEventListener("DOMContentLoaded", fixerGmailMagicbox, { passive: true });
     window.addEventListener("orientationchange", function() {
       setTimeout(fixerGmailMagicbox, 250);
+    }, { passive: true });
+  })();
+</script>
+
+
+<script>
+  (function() {
+    function fixerGmailSurPage() {
+      if (window.innerWidth > 768) {
+        document.documentElement.style.removeProperty("--gmail-fixed-page-top");
+        return;
+      }
+
+      const paysage = window.innerWidth <= 900 && window.innerHeight <= 500 && window.matchMedia("(orientation: landscape)").matches;
+      const hauteur = window.innerHeight;
+      const position = paysage ? Math.round(hauteur * 0.62) : Math.round(hauteur * 0.68);
+
+      document.documentElement.style.setProperty("--gmail-fixed-page-top", position + "px");
+
+      /* Empêche les anciens effets de déplacer @gmail */
+      document.documentElement.style.removeProperty("--contact-smooth-top");
+      document.documentElement.style.removeProperty("--gmail-fixed-top");
+    }
+
+    fixerGmailSurPage();
+    window.addEventListener("DOMContentLoaded", fixerGmailSurPage, { passive: true });
+    window.addEventListener("orientationchange", function() {
+      setTimeout(fixerGmailSurPage, 250);
     }, { passive: true });
   })();
 </script>
