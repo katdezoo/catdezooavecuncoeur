@@ -7153,13 +7153,12 @@ body {
     }, { passive: true });
   })();
 </script>
-
 <style id="rules-page-free-scroll-final">
-  /* RULES : box basse, moins haute, barre fine, vidéo inchangée */
+  /* RULES : top ancré, croissance vers le bas, barre fine */
   @media screen and (max-width: 768px) {
     html.rules-page-scroll-mode,
     html.rules-page-scroll-mode body {
-      min-height: calc(100vh + var(--rules-page-scroll-extra, 260px)) !important;
+      min-height: calc(100vh + var(--rules-page-scroll-extra, 420px)) !important;
       overflow-y: auto !important;
       overflow-x: hidden !important;
       scrollbar-width: thin !important;
@@ -7215,6 +7214,7 @@ body {
     let topCible = null;
     let hauteurCible = null;
     let raf = null;
+    let syncScroll = false;
 
     function estSmartphone() {
       return window.innerWidth <= 768;
@@ -7241,7 +7241,20 @@ body {
       return Math.max(min, Math.min(max, v));
     }
 
-    function topLecteur() {
+    function maxPageScroll() {
+      return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    function progressionPage() {
+      if (!rulesActive()) return 0;
+      return clamp((window.scrollY || document.documentElement.scrollTop || 0) / maxPageScroll(), 0, 1);
+    }
+
+    function maxBoxScroll(box) {
+      return Math.max(1, box.scrollHeight - box.clientHeight);
+    }
+
+    function topLecteurMedia() {
       const hauteur = hauteurViewportStable();
       const lecteur = document.querySelector(".audio-box");
 
@@ -7258,7 +7271,7 @@ body {
     function appliquerStylesFixes(box, paysage) {
       box.style.setProperty("width", "calc(100vw - 24px)", "important");
       box.style.setProperty("max-width", "calc(100vw - 24px)", "important");
-      box.style.setProperty("padding", paysage ? "20px 10px" : "24px 13px", "important");
+      box.style.setProperty("padding", paysage ? "18px 10px" : "22px 13px", "important");
       box.style.setProperty("overflow-y", "auto", "important");
       box.style.setProperty("overflow-x", "hidden", "important");
       box.style.setProperty("-webkit-overflow-scrolling", "touch", "important");
@@ -7288,25 +7301,38 @@ body {
       const largeur = largeurViewportStable();
       const hauteur = hauteurViewportStable();
       const paysage = largeur <= 900 && hauteur <= 500 && window.matchMedia("(orientation: landscape)").matches;
+      const p = progressionPage();
 
-      /* Point d'ancrage simple : le bas frôle le lecteur MP3, sans le toucher. */
-      const margeLecteur = paysage ? 7 : 10;
-      const basAncre = Math.round(topLecteur() - margeLecteur);
+      /* Cette fois, c'est le haut qui reste ancré : la box grandit vers le bas. */
+      const topAncre = Math.round(hauteur * (paysage ? 0.42 : 0.545));
 
-      /* Box moins haute : elle descend, mais elle ne devient pas immense. */
-      const hauteurVoulue = Math.round(clamp(
-        hauteur * (paysage ? 0.22 : 0.175),
-        paysage ? 78 : 112,
-        paysage ? 132 : 150
+      /* Le bas final frôle le lecteur média, sans le toucher. */
+      const margeLecteur = paysage ? 5 : 6;
+      const basFinal = Math.round(topLecteurMedia() - margeLecteur);
+
+      const hauteurGrande = Math.max(
+        paysage ? 82 : 112,
+        basFinal - topAncre
+      );
+
+      const hauteurPetite = Math.round(clamp(
+        hauteurGrande * 0.50,
+        paysage ? 42 : 56,
+        paysage ? 76 : 82
       ));
 
-      /* Elle reste sous le bandeau vidéo, mais le bas est prioritaire près du lecteur. */
-      const hautMinimum = Math.round(hauteur * (paysage ? 0.42 : 0.50));
-      hauteurCible = Math.min(hauteurVoulue, Math.max(80, basAncre - hautMinimum));
-      hauteurCible = Math.max(paysage ? 72 : 104, hauteurCible);
-      topCible = Math.round(basAncre - hauteurCible);
+      hauteurCible = Math.round(hauteurPetite + (hauteurGrande - hauteurPetite) * p);
+
+      /* Top fixe : quand elle grandit, seul le bas descend. */
+      topCible = topAncre;
 
       appliquerStylesFixes(box, paysage);
+
+      if (!syncScroll && rulesActive()) {
+        syncScroll = true;
+        box.scrollTop = p * maxBoxScroll(box);
+        syncScroll = false;
+      }
 
       if (topActuel === null) {
         topActuel = topCible;
@@ -7329,7 +7355,6 @@ body {
         return;
       }
 
-      /* Même smooth que la magicbox validée. */
       const douceur = 0.045;
       const stop = 0.12;
 
@@ -7358,11 +7383,24 @@ body {
       }
     }
 
+    function synchroniserPageDepuisBox() {
+      const box = boxRules();
+      if (!estSmartphone() || !rulesActive() || !box || syncScroll) return;
+
+      syncScroll = true;
+      const progress = clamp(box.scrollTop / maxBoxScroll(box), 0, 1);
+      window.scrollTo({ top: progress * maxPageScroll(), left: 0, behavior: "auto" });
+      syncScroll = false;
+
+      calculerCiblesMagicboxFluide();
+    }
+
     function brancherRulesSansBloquerGestes() {
       const box = boxRules();
-      if (!box || box.dataset.rulesLowSmallOk) return;
-      box.dataset.rulesLowSmallOk = "1";
+      if (!box || box.dataset.rulesGrowDownOk) return;
+      box.dataset.rulesGrowDownOk = "1";
 
+      box.addEventListener("scroll", synchroniserPageDepuisBox, { passive: true });
       box.addEventListener("touchstart", function() {}, { passive: true });
       box.addEventListener("touchmove", function() {}, { passive: true });
       box.addEventListener("wheel", function() {}, { passive: true });
@@ -7373,7 +7411,7 @@ body {
       document.documentElement.classList.toggle("rules-page-scroll-mode", !!actif);
 
       if (actif) {
-        document.documentElement.style.setProperty("--rules-page-scroll-extra", "260px");
+        document.documentElement.style.setProperty("--rules-page-scroll-extra", "420px");
       } else {
         document.documentElement.style.removeProperty("--rules-page-scroll-extra");
       }
@@ -7399,7 +7437,12 @@ body {
     document.addEventListener("click", function(event) {
       const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
       if (texte === "RULES" || texte === "starthere" || texte === "SEND A WAV / MP3") {
-        setTimeout(demanderMagicboxFluide, 45);
+        setTimeout(function() {
+          if (texte === "RULES") {
+            window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          }
+          demanderMagicboxFluide();
+        }, 45);
         setTimeout(demanderMagicboxFluide, 220);
       }
     }, { passive: true });
