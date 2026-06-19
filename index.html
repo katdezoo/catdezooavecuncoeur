@@ -8524,6 +8524,256 @@ body {
     }
   }
 </style>
+<style id="gpc-starthere-box-copy-final">
+  /*
+    STARTHERE BOX COPY FINAL
+    #accueil devient une copie visuelle/fonctionnelle de la box RULES.
+    Le texte reste modifiable dans le H1 sans toucher aux flèches ni au moteur.
+  */
+
+  #accueil.gpc-start-box-section {
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    touch-action: pan-y pinch-zoom !important;
+    scroll-behavior: smooth !important;
+    scrollbar-width: thin !important;
+    isolation: isolate !important;
+  }
+
+  #accueil.gpc-start-box-section .card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #accueil.gpc-start-box-section h1 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: anywhere !important;
+    overflow: visible !important;
+    text-align: center !important;
+  }
+
+  #accueil.gpc-start-box-section::before,
+  #accueil.gpc-start-box-section::after,
+  #accueil.gpc-start-box-section .card::before,
+  #accueil.gpc-start-box-section .card::after,
+  #accueil.gpc-start-box-section .card > .magicbox-arrow,
+  #accueil.gpc-start-box-section .card .magicbox-arrow {
+    content: "" !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    pointer-events: none !important;
+  }
+
+  #accueil.gpc-start-box-section > .magicbox-arrow {
+    position: absolute !important;
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+    z-index: 999 !important;
+    box-sizing: border-box !important;
+    width: var(--rules-arrow-size, clamp(8px, 0.78vw, 13px)) !important;
+    height: var(--rules-arrow-size, clamp(8px, 0.78vw, 13px)) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    text-shadow: none !important;
+    border: 0 solid transparent !important;
+    border-left: 0 solid transparent !important;
+    border-top: 0 solid transparent !important;
+    border-right: var(--rules-arrow-stroke, clamp(1.5px, 0.15vw, 2.2px)) solid #000000 !important;
+    border-bottom: var(--rules-arrow-stroke, clamp(1.5px, 0.15vw, 2.2px)) solid #000000 !important;
+    border-radius: 0 !important;
+    filter:
+      drop-shadow(0 0 3px rgba(255,255,255,1))
+      drop-shadow(0 0 7px rgba(255,255,255,.78))
+      drop-shadow(0 0 12px rgba(255,255,255,.46)) !important;
+    transform-origin: 50% 50% !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    transition:
+      opacity 460ms cubic-bezier(.22, 1, .36, 1),
+      transform 580ms cubic-bezier(.22, 1, .36, 1),
+      filter 580ms cubic-bezier(.22, 1, .36, 1) !important;
+  }
+
+  #accueil.gpc-start-box-section > .magicbox-arrow-down {
+    top: var(--rules-arrow-gap, clamp(10px, 1.1vw, 16px)) !important;
+    right: var(--rules-arrow-gap-x, clamp(16px, 2.1vw, 28px)) !important;
+    bottom: auto !important;
+    left: auto !important;
+    opacity: 1 !important;
+    transform: rotate(45deg) translate3d(0,0,0) scale(1) !important;
+  }
+
+  #accueil.gpc-start-box-section > .magicbox-arrow-up {
+    top: auto !important;
+    right: var(--rules-arrow-gap-x, clamp(16px, 2.1vw, 28px)) !important;
+    bottom: var(--rules-arrow-gap, clamp(10px, 1.1vw, 16px)) !important;
+    left: auto !important;
+    opacity: 0 !important;
+    transform: rotate(-135deg) translate3d(0, 7px, 0) scale(.86) !important;
+  }
+
+  #accueil.gpc-start-box-section.rules-at-end > .magicbox-arrow-up,
+  #accueil.gpc-start-box-section.rules-no-scroll > .magicbox-arrow-up {
+    opacity: 1 !important;
+    transform: rotate(-135deg) translate3d(0,0,0) scale(1) !important;
+  }
+
+  @media screen and (min-width: 769px) {
+    #accueil.gpc-start-box-section {
+      position: fixed !important;
+      left: 50% !important;
+      top: var(--ordi-rules-top, 58dvh) !important;
+      width: var(--ordi-rules-fixed-width, min(760px, calc(100vw - 42px))) !important;
+      max-width: min(var(--ordi-rules-fixed-width, 760px), calc(100vw - 42px)) !important;
+      height: var(--ordi-rules-fixed-height, clamp(78px, 13dvh, 132px)) !important;
+      min-height: var(--ordi-rules-fixed-height, clamp(78px, 13dvh, 132px)) !important;
+      max-height: min(var(--ordi-rules-fixed-height, 132px), calc(100dvh - 220px)) !important;
+      transform: translate3d(-50%, 0, 0) !important;
+      transition: none !important;
+      animation: none !important;
+      will-change: auto !important;
+      scroll-padding-top: clamp(30px, 3vw, 44px) !important;
+      scroll-padding-bottom: clamp(36px, 3.5vw, 54px) !important;
+      --rules-arrow-gap: clamp(10px, 1.1vw, 16px);
+      --rules-arrow-gap-x: clamp(16px, 2.1vw, 28px);
+      --rules-arrow-size: clamp(8px, .78vw, 13px);
+      --rules-arrow-stroke: clamp(1.5px, .15vw, 2.2px);
+    }
+
+    #accueil.gpc-start-box-section h1 {
+      max-width: 96vw !important;
+      font-size: clamp(18px, 1.78vw, 28px) !important;
+      line-height: 1.16 !important;
+    }
+  }
+
+  @media screen and (min-width: 1400px) and (min-height: 820px) {
+    #accueil.gpc-start-box-section {
+      width: var(--ordi-rules-fixed-width, 780px) !important;
+      max-width: var(--ordi-rules-fixed-width, 780px) !important;
+      height: var(--ordi-rules-fixed-height, 136px) !important;
+      min-height: var(--ordi-rules-fixed-height, 136px) !important;
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1050px),
+         screen and (min-width: 769px) and (max-height: 760px) {
+    #accueil.gpc-start-box-section {
+      width: var(--ordi-rules-fixed-width, min(calc(100vw - 42px), 720px)) !important;
+      max-width: var(--ordi-rules-fixed-width, min(calc(100vw - 42px), 720px)) !important;
+      height: var(--ordi-rules-fixed-height, clamp(78px, 13dvh, 150px)) !important;
+      min-height: var(--ordi-rules-fixed-height, clamp(78px, 13dvh, 150px)) !important;
+      max-height: var(--ordi-rules-fixed-height, clamp(78px, 13dvh, 150px)) !important;
+    }
+
+    #accueil.gpc-start-box-section h1 {
+      font-size: clamp(14px, 1.38vw, 21px) !important;
+      line-height: 1.12 !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    html.gpc-start-hier-active #accueil.gpc-start-box-section.active {
+      position: fixed !important;
+      left: 50% !important;
+      top: var(--start-hier-top, 56vh) !important;
+      bottom: auto !important;
+      width: calc(100vw - 24px) !important;
+      max-width: calc(100vw - 24px) !important;
+      height: var(--start-hier-height, calc(100dvh - 56vh - 190px)) !important;
+      min-height: 112px !important;
+      max-height: none !important;
+      margin: 0 !important;
+      padding: 22px 13px !important;
+      scrollbar-width: thin !important;
+      z-index: 16000 !important;
+      transform: translate3d(-50%, var(--start-hier-float, 0px), 0) !important;
+      will-change: transform, top, height !important;
+      contain: layout paint style !important;
+      backface-visibility: hidden !important;
+      -webkit-backface-visibility: hidden !important;
+      transform-style: preserve-3d !important;
+      pointer-events: auto !important;
+      scroll-padding-top: clamp(28px, 8vw, 42px) !important;
+      scroll-padding-bottom: clamp(42px, 12vw, 68px) !important;
+      --rules-arrow-size: clamp(8px, 2.6vw, 11px);
+      --rules-arrow-stroke: clamp(1.5px, .55vw, 2px);
+      --rules-arrow-gap: clamp(9px, 3vw, 15px);
+      --rules-arrow-gap-x: clamp(13px, 5vw, 22px);
+    }
+
+    html.gpc-start-hier-active #accueil.gpc-start-box-section.active h1 {
+      max-width: 100% !important;
+      font-size: clamp(15px, 4.6vw, 21px) !important;
+      line-height: 1.22 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      text-align: center !important;
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    html.gpc-start-hier-active #accueil.gpc-start-box-section.active {
+      width: calc(100vw - 22px) !important;
+      max-width: calc(100vw - 22px) !important;
+      padding: 21px 12px !important;
+    }
+  }
+
+  @media screen and (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+    html.gpc-start-hier-active #accueil.gpc-start-box-section.active {
+      width: min(92vw, 680px) !important;
+      max-width: min(92vw, 680px) !important;
+      min-height: 82px !important;
+      padding: 18px 10px !important;
+    }
+
+    html.gpc-start-hier-active #accueil.gpc-start-box-section.active h1 {
+      font-size: clamp(10px, 3.35vw, 13px) !important;
+      line-height: 1.12 !important;
+    }
+  }
+</style>
 </head>
 
 <body>
@@ -8558,7 +8808,31 @@ body {
 
 <div id="parisTimer" class="paris-timer"><span id="timerTime">00:00:01</span> <span id="timerPeriod" class="timer-period">AM</span></div>
 
-<section id="accueil" class="page-section active">
+<section id="accueil" class="page-section active gpc-start-box-section">
+  <div class="card">
+    <h1>US: -ready for a big competition?/<br>
+CN: -准备好参加大型比赛了吗?/<br>
+IN: -क्या तुम एक बड़ी प्रतियोगिता के लिए तैयार हो?/<br>
+ES: -¿listo para una gran competición?/<br>
+SA: -هل أنت مستعد لمنافسة كبيرة؟/<br>
+FR: -prêt pour une grosse compétition?/<br>
+BD: -একটি বড় প্রতিযোগিতার জন্য প্রস্তুত?/<br>
+BR: -pronto para uma grande competição?/<br>
+RU: -готов к большому соревнованию?/<br>
+PK: -کیا تم ایک بڑے مقابلے کے لیے تیار ہو؟/<br>
+ID: -siap untuk kompetisi besar?/<br>
+DE: -bereit für einen großen Wettbewerb?/<br>
+JP: -大きな大会の準備はできた？/<br>
+KR: -큰 대회를 준비됐어?/<br>
+TR: -büyük bir yarışmaya hazır mısın?/<br>
+VN: -sẵn sàng cho một cuộc thi lớn chưa?/<br>
+IT: -pronto per una grande competizione?/<br>
+PL: -gotowy na duże zawody?/<br>
+NL: -klaar voor een grote competitie?/<br>
+TH: -พร้อมสำหรับการแข่งขันใหญ่หรือยัง?/<br>
+SE: -redo för en stor tävling?/<br>
+PT: -pronto para uma grande competição?/<br></h1>
+  </div>
 </section>
 
 <section id="apropos" class="page-section">
@@ -10783,6 +11057,306 @@ body {
 
     brancherScrollBox();
     setTimeout(function() { calculer(true); }, 500);
+  })();
+</script>
+<script id="gpc-starthere-box-copy-script-final">
+  (function() {
+    "use strict";
+
+    const root = document.documentElement;
+    const oldAfficherSection = window.afficherSection;
+
+    let topActuel = null;
+    let topCible = null;
+    let hauteurActuelle = null;
+    let hauteurCible = null;
+    let floatActuel = 0;
+    let floatCible = 0;
+    let dernierScrollY = window.scrollY || 0;
+    let dernierBoxScroll = 0;
+    let raf = null;
+    let retourTimer = null;
+    let resizeObserver = null;
+
+    function el(id) {
+      return document.getElementById(id);
+    }
+
+    function startBox() {
+      return el("accueil");
+    }
+
+    function mobile() {
+      return (window.innerWidth || document.documentElement.clientWidth || 390) <= 768;
+    }
+
+    function activeStart() {
+      const b = startBox();
+      return !!(b && b.classList.contains("active"));
+    }
+
+    function clamp(v, min, max) {
+      return Math.max(min, Math.min(max, v));
+    }
+
+    function normaliserFleches(b) {
+      if (!b) return null;
+
+      b.querySelectorAll(".card .magicbox-arrow").forEach(function(node) {
+        if (node && node.parentNode) node.parentNode.removeChild(node);
+      });
+
+      function prendre(classe) {
+        const toutes = Array.from(b.querySelectorAll("." + classe));
+        const direct = toutes.find(function(node) { return node.parentNode === b; });
+        const premiere = direct || toutes[0] || document.createElement("span");
+        premiere.className = "magicbox-arrow " + classe;
+        premiere.setAttribute("aria-hidden", "true");
+        try { premiere.setAttribute("draggable", "false"); } catch (e) {}
+        toutes.forEach(function(node) {
+          if (node !== premiere && node.parentNode) node.parentNode.removeChild(node);
+        });
+        return premiere;
+      }
+
+      const down = prendre("magicbox-arrow-down");
+      const up = prendre("magicbox-arrow-up");
+
+      if (down.parentNode !== b || b.firstElementChild !== down) {
+        b.insertBefore(down, b.firstChild);
+      }
+      if (up.parentNode !== b || b.lastElementChild !== up) {
+        b.appendChild(up);
+      }
+      return b;
+    }
+
+    function verifierFleches(b) {
+      b = normaliserFleches(b || startBox());
+      if (!b) return;
+
+      const visible = b.clientHeight || 0;
+      const total = b.scrollHeight || 0;
+      const marge = Math.max(4, Math.round(visible * 0.045));
+      const maxScroll = Math.max(0, total - visible);
+      const noScroll = maxScroll <= marge;
+      const atEnd = noScroll || (b.scrollTop || 0) >= maxScroll - marge;
+
+      b.classList.toggle("rules-no-scroll", noScroll);
+      b.classList.toggle("rules-at-end", atEnd);
+    }
+
+    function dimensions() {
+      const w = Math.round(window.innerWidth || document.documentElement.clientWidth || 390);
+      const h = Math.round(window.innerHeight || document.documentElement.clientHeight || screen.height || 760);
+      return {
+        w: w,
+        h: h,
+        paysage: w <= 900 && h <= 500 && window.matchMedia("(orientation: landscape)").matches
+      };
+    }
+
+    function topLecteurMedia(d) {
+      const lecteur = document.querySelector(".audio-box");
+      if (lecteur) {
+        const rect = lecteur.getBoundingClientRect();
+        if (rect && rect.top > 0 && rect.top < d.h) return rect.top;
+      }
+      return d.h - 170;
+    }
+
+    function appliquer() {
+      const b = startBox();
+      if (!b) return;
+      b.style.setProperty("--start-hier-top", topActuel.toFixed(2) + "px");
+      b.style.setProperty("--start-hier-height", hauteurActuelle.toFixed(2) + "px");
+      b.style.setProperty("--start-hier-float", floatActuel.toFixed(2) + "px");
+      verifierFleches(b);
+    }
+
+    function calculer(force) {
+      const b = startBox();
+
+      if (!mobile() || !b || !activeStart()) {
+        root.classList.remove("gpc-start-hier-active");
+        if (b) {
+          b.style.removeProperty("--start-hier-top");
+          b.style.removeProperty("--start-hier-height");
+          b.style.removeProperty("--start-hier-float");
+          verifierFleches(b);
+        }
+        topActuel = null;
+        topCible = null;
+        hauteurActuelle = null;
+        hauteurCible = null;
+        floatActuel = 0;
+        floatCible = 0;
+        raf = null;
+        return;
+      }
+
+      root.classList.add("gpc-start-hier-active");
+
+      const d = dimensions();
+      const descenteLegere = d.paysage ? 8 : clamp(Math.round(d.h * 0.018), 10, 18);
+      const topAncre = Math.round(d.h * (d.paysage ? 0.42 : 0.545) + descenteLegere);
+      const margeLecteur = d.paysage ? 5 : 6;
+      const basFinal = Math.round(topLecteurMedia(d) - margeLecteur);
+      const hauteurGrande = Math.max(d.paysage ? 82 : 112, basFinal - topAncre);
+
+      topCible = topAncre;
+      hauteurCible = hauteurGrande;
+
+      if (topActuel === null || force) {
+        topActuel = topCible;
+        hauteurActuelle = hauteurCible;
+      }
+
+      appliquer();
+      lancer();
+    }
+
+    function retourSouple() {
+      clearTimeout(retourTimer);
+      retourTimer = setTimeout(function() {
+        floatCible = 0;
+        lancer();
+      }, 140);
+    }
+
+    function impulsionPage() {
+      if (!mobile() || !activeStart()) return;
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      const dy = y - dernierScrollY;
+      dernierScrollY = y;
+
+      if (Math.abs(dy) > 0.2) {
+        floatCible = clamp(floatCible + dy * 0.065, -18, 18);
+        retourSouple();
+        lancer();
+      }
+    }
+
+    function impulsionBox() {
+      const b = startBox();
+      if (!b || !mobile() || !activeStart()) return;
+      const y = b.scrollTop || 0;
+      const dy = y - dernierBoxScroll;
+      dernierBoxScroll = y;
+
+      if (Math.abs(dy) > 0.25) {
+        floatCible = clamp(floatCible + dy * 0.035, -14, 14);
+        retourSouple();
+        lancer();
+      }
+
+      verifierFleches(b);
+    }
+
+    function lancer() {
+      if (!raf) raf = requestAnimationFrame(animer);
+    }
+
+    function animer() {
+      const b = startBox();
+      if (!mobile() || !b || !activeStart() || topCible === null || hauteurCible === null) {
+        raf = null;
+        return;
+      }
+
+      const douceurPosition = 0.024;
+      const douceurFloat = 0.040;
+      const stop = 0.035;
+
+      const dt = topCible - topActuel;
+      const dh = hauteurCible - hauteurActuelle;
+      const df = floatCible - floatActuel;
+
+      topActuel = Math.abs(dt) < stop ? topCible : topActuel + dt * douceurPosition;
+      hauteurActuelle = Math.abs(dh) < stop ? hauteurCible : hauteurActuelle + dh * douceurPosition;
+      floatActuel = Math.abs(df) < stop ? floatCible : floatActuel + df * douceurFloat;
+
+      appliquer();
+
+      if (Math.abs(dt) > stop || Math.abs(dh) > stop || Math.abs(df) > stop) {
+        raf = requestAnimationFrame(animer);
+      } else {
+        raf = null;
+      }
+    }
+
+    function brancher() {
+      const b = normaliserFleches(startBox());
+      if (!b) return;
+
+      if (!b.dataset.startBoxCopyOk) {
+        b.dataset.startBoxCopyOk = "1";
+        b.addEventListener("scroll", impulsionBox, { passive: true });
+        b.addEventListener("touchmove", impulsionBox, { passive: true });
+        b.addEventListener("wheel", impulsionBox, { passive: true });
+      }
+
+      if ("ResizeObserver" in window && !resizeObserver) {
+        resizeObserver = new ResizeObserver(function() { verifierFleches(b); });
+        resizeObserver.observe(b);
+        const card = b.querySelector(".card");
+        const h1 = b.querySelector("h1");
+        if (card) resizeObserver.observe(card);
+        if (h1) resizeObserver.observe(h1);
+      }
+
+      verifierFleches(b);
+    }
+
+    window.afficherSection = function(id) {
+      if (typeof oldAfficherSection === "function") oldAfficherSection(id);
+
+      if (id === "accueil") {
+        topActuel = null;
+        hauteurActuelle = null;
+        floatActuel = 0;
+        floatCible = 0;
+        dernierBoxScroll = 0;
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        setTimeout(function() { brancher(); calculer(true); }, 45);
+        setTimeout(function() { floatCible = 10; retourSouple(); lancer(); }, 100);
+        setTimeout(function() { calculer(false); verifierFleches(); }, 240);
+      } else {
+        root.classList.remove("gpc-start-hier-active");
+        setTimeout(function() { calculer(false); }, 60);
+      }
+    };
+
+    window.addEventListener("scroll", function() {
+      calculer(false);
+      impulsionPage();
+    }, { passive: true });
+
+    window.addEventListener("resize", function() {
+      calculer(false);
+      verifierFleches();
+    }, { passive: true });
+
+    window.addEventListener("orientationchange", function() {
+      setTimeout(function() { calculer(true); verifierFleches(); }, 120);
+      setTimeout(function() { calculer(true); verifierFleches(); }, 420);
+    }, { passive: true });
+
+    window.addEventListener("pageshow", function() {
+      setTimeout(function() { brancher(); calculer(true); verifierFleches(); }, 120);
+    }, { passive: true });
+
+    document.addEventListener("click", function(event) {
+      const texte = event.target && event.target.textContent ? event.target.textContent.trim() : "";
+      if (texte === "starthere") {
+        setTimeout(function() { brancher(); calculer(true); }, 45);
+        setTimeout(function() { floatCible = 10; retourSouple(); lancer(); }, 100);
+        setTimeout(function() { calculer(false); verifierFleches(); }, 240);
+      }
+    }, { passive: true });
+
+    brancher();
+    setTimeout(function() { calculer(true); verifierFleches(); }, 500);
   })();
 </script>
 </body>
