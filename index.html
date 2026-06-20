@@ -4776,7 +4776,8 @@ html,body {
     font-size:clamp(13px,4.6vw,19px) !important;
     line-height:1.22 !important
   }
-  @media screen and (max-width:900px) and (max-height:500px) and (orientation:landscape) {
+}
+@media screen and (max-width:900px) and (max-height:500px) and (orientation:landscape) {
     
     .copyright-intro-page p {
       font-size:clamp(12px,4.5vh,22px) !important
@@ -8270,301 +8271,6 @@ html,body {
 
 
 
-
-
-<style id="gpc-sappelle-red-zone-safe-layout-final">
-:root {
-  --gpc-video-red-top:22dvh;
-  --gpc-video-red-bottom:57dvh;
-  --gpc-video-red-gap:clamp(8px,1.7dvh,20px);
-  --gpc-video-safe-below-red:calc(var(--gpc-video-red-bottom) + var(--gpc-video-red-gap))
-}
-
-@supports not (height:100dvh) {
-  :root {
-    --gpc-video-red-top:22vh;
-    --gpc-video-red-bottom:57vh
-  }
-}
-
-@media screen and (min-width:769px) {
-  nav#menuPrincipal {
-    position:fixed !important;
-    top:calc(env(safe-area-inset-top) + clamp(10px,1.8dvh,20px)) !important;
-    left:0 !important;
-    width:100% !important;
-    box-sizing:border-box !important;
-    display:flex;
-    justify-content:center !important;
-    align-items:center !important;
-    gap:clamp(20px,2.8vw,42px) !important;
-    padding:0 12px !important;
-    z-index:30000 !important;
-    pointer-events:auto !important
-  }
-
-  nav#menuPrincipal button {
-    font-size:clamp(15px,1.18vw,19px) !important;
-    line-height:1.05 !important;
-    min-height:clamp(24px,3.4dvh,34px) !important;
-    margin:0 !important;
-    transform:none !important
-  }
-
-  .paris-timer {
-    top:clamp(74px,13.4dvh,148px) !important;
-    font-size:clamp(42px,6.4vw,76px) !important;
-    line-height:1 !important;
-    z-index:25000 !important
-  }
-
-  #apropos.page-section {
-    top:60vh !important;
-    top:60dvh !important;
-    top:max(60dvh,var(--gpc-video-safe-below-red)) !important;
-    left:50% !important;
-    transform:translate3d(-50%,0,0) !important;
-    width:min(780px,calc(100vw - 48px)) !important;
-    max-width:min(780px,calc(100vw - 48px)) !important;
-    height:clamp(96px,14dvh,142px) !important;
-    min-height:clamp(96px,14dvh,142px) !important;
-    max-height:clamp(96px,14dvh,142px) !important;
-    padding:clamp(14px,1.7dvh,22px) clamp(26px,3vw,42px) !important;
-    box-sizing:border-box !important;
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
-    scrollbar-width:thin !important
-  }
-
-  #apropos.page-section.active {
-    display:block !important;
-    pointer-events:auto !important
-  }
-
-  #apropos .card {
-    width:100% !important;
-    max-width:100% !important;
-    height:auto !important;
-    min-height:0 !important;
-    margin:0 auto !important;
-    padding:0 !important;
-    box-sizing:border-box !important
-  }
-
-  #apropos h1 {
-    font-size:clamp(13px,1.12vw,18px) !important;
-    line-height:1.12 !important;
-    margin:0 !important;
-    letter-spacing:0.01em !important
-  }
-
-  #contact.page-section {
-    top:70vh !important;
-    top:70dvh !important;
-    top:max(70dvh,calc(var(--gpc-video-safe-below-red) + clamp(42px,7dvh,84px))) !important;
-    left:50% !important;
-    transform:translate3d(-50%,0,0) !important;
-    width:100% !important;
-    max-width:100% !important;
-    padding:0 14px !important;
-    box-sizing:border-box !important
-  }
-
-  #contact h1 {
-    font-size:clamp(30px,4.2vw,50px) !important;
-    line-height:1.05 !important;
-    margin:0 !important
-  }
-}
-
-@media screen and (max-width:768px) {
-  :root {
-    --gpc-video-red-top:22dvh;
-    --gpc-video-red-bottom:57dvh;
-    --gpc-video-red-gap:clamp(8px,1.8dvh,14px)
-  }
-
-  nav#menuPrincipal {
-    position:fixed !important;
-    top:0 !important;
-    left:0 !important;
-    width:100% !important;
-    box-sizing:border-box !important;
-    display:flex;
-    flex-direction:column !important;
-    align-items:center !important;
-    justify-content:flex-start !important;
-    gap:clamp(4px,1.15dvh,8px) !important;
-    padding:calc(7px + env(safe-area-inset-top)) 10px 5px 10px !important;
-    z-index:30000 !important;
-    pointer-events:auto !important
-  }
-
-  nav#menuPrincipal button {
-    font-size:clamp(13px,4.05vw,18px) !important;
-    line-height:1.02 !important;
-    min-height:clamp(21px,6.3vw,27px) !important;
-    margin:0 !important;
-    padding:0 !important;
-    transform:none !important
-  }
-
-  .paris-timer {
-    top:clamp(96px,14.7dvh,132px) !important;
-    font-size:clamp(31px,9.2vw,42px) !important;
-    line-height:1 !important;
-    letter-spacing:1px !important;
-    z-index:25000 !important
-  }
-
-  #timerTime {
-    width:8ch !important
-  }
-
-  .timer-period {
-    font-size:0.34em !important
-  }
-
-  #apropos,
-  html.gpc-rules-hier-active #apropos.active {
-    top:calc(var(--gpc-video-safe-below-red)) !important;
-    left:50% !important;
-    bottom:auto !important;
-    transform:translate3d(-50%,var(--rules-hier-float,0px),0) !important;
-    width:calc(100vw - clamp(18px,5vw,28px)) !important;
-    max-width:calc(100vw - clamp(18px,5vw,28px)) !important;
-    height:var(--rules-hier-height,clamp(86px,17dvh,142px)) !important;
-    min-height:0 !important;
-    max-height:calc(100dvh - var(--gpc-video-safe-below-red) - clamp(172px,24dvh,220px) - env(safe-area-inset-bottom)) !important;
-    padding:clamp(13px,3.7vw,20px) clamp(12px,4vw,18px) !important;
-    box-sizing:border-box !important;
-    overflow-y:auto !important;
-    overflow-x:hidden !important;
-    -webkit-overflow-scrolling:touch !important;
-    overscroll-behavior:contain !important;
-    z-index:16000 !important;
-    scrollbar-width:thin !important
-  }
-
-  @supports not (height:100dvh) {
-    #apropos,
-    html.gpc-rules-hier-active #apropos.active {
-      max-height:calc(100vh - var(--gpc-video-safe-below-red) - clamp(172px,24vh,220px) - env(safe-area-inset-bottom)) !important
-    }
-  }
-
-  #apropos.active {
-    display:block !important;
-    pointer-events:auto !important
-  }
-
-  #apropos .card {
-    width:100% !important;
-    max-width:100% !important;
-    height:auto !important;
-    min-height:0 !important;
-    margin:0 auto !important;
-    padding:0 !important;
-    box-sizing:border-box !important
-  }
-
-  #apropos h1 {
-    font-size:clamp(12px,3.35vw,16px) !important;
-    line-height:1.10 !important;
-    margin:0 !important;
-    letter-spacing:0 !important;
-    word-break:normal !important;
-    overflow-wrap:anywhere !important
-  }
-
-  #apropos > .magicbox-arrow {
-    --rules-arrow-size:clamp(7px,2.2vw,10px);
-    --rules-arrow-stroke:clamp(1.4px,0.5vw,1.9px);
-    --rules-arrow-gap:clamp(7px,2.2vw,11px);
-    --rules-arrow-gap-x:clamp(11px,4.2vw,18px)
-  }
-
-  #contact,
-  #contact.active {
-    top:calc(var(--gpc-video-safe-below-red) + clamp(44px,9.5dvh,76px)) !important;
-    left:50% !important;
-    transform:translate3d(-50%,0,0) !important;
-    width:100% !important;
-    max-width:100% !important;
-    padding:0 12px !important;
-    box-sizing:border-box !important;
-    z-index:16500 !important
-  }
-
-  #contact.active {
-    display:flex !important;
-    justify-content:center !important;
-    align-items:flex-start !important
-  }
-
-  #contact h1,
-  #contact.active h1 {
-    transform:translate3d(0,0,0) !important;
-    font-size:clamp(22px,8vw,34px) !important;
-    line-height:1.05 !important;
-    margin:0 !important
-  }
-}
-
-@media screen and (max-width:900px) and (max-height:500px) and (orientation:landscape) {
-  :root {
-    --gpc-video-red-top:22vh;
-    --gpc-video-red-bottom:57vh;
-    --gpc-video-red-gap:clamp(6px,1.8vh,10px)
-  }
-
-  nav#menuPrincipal {
-    gap:clamp(3px,1.4vh,6px) !important;
-    padding:calc(4px + env(safe-area-inset-top)) 10px 4px 10px !important
-  }
-
-  nav#menuPrincipal button {
-    font-size:clamp(12px,2.2vw,15px) !important;
-    min-height:18px !important;
-    line-height:1 !important
-  }
-
-  .paris-timer {
-    top:clamp(54px,14.4vh,82px) !important;
-    font-size:clamp(26px,7.4vh,38px) !important
-  }
-
-  #apropos,
-  html.gpc-rules-hier-active #apropos.active {
-    top:calc(var(--gpc-video-safe-below-red)) !important;
-    width:min(620px,calc(100vw - 32px)) !important;
-    max-width:min(620px,calc(100vw - 32px)) !important;
-    height:var(--rules-hier-height,clamp(68px,20vh,104px)) !important;
-    max-height:calc(100vh - var(--gpc-video-safe-below-red) - 96px - env(safe-area-inset-bottom)) !important;
-    padding:clamp(9px,2.4vh,14px) clamp(12px,3vw,18px) !important
-  }
-
-  #apropos h1 {
-    font-size:clamp(10.5px,2vw,13.5px) !important;
-    line-height:1.06 !important
-  }
-
-  #contact,
-  #contact.active {
-    top:calc(var(--gpc-video-safe-below-red) + clamp(22px,6vh,42px)) !important
-  }
-
-  #contact h1,
-  #contact.active h1 {
-    font-size:clamp(20px,4.6vw,30px) !important
-  }
-
-  .audio-box {
-    bottom:calc(12px + env(safe-area-inset-bottom)) !important
-  }
-}
-</style>
-
 <script id="gpc-bravo-fast-core-script-final">
 (function() {
   "use strict";
@@ -9725,12 +9431,11 @@ html,body {
     root.style.setProperty("--rules-page-scroll-extra", extra + "px");
     root.classList.add("gpc-rules-hier-active");
     root.classList.add("rules-page-scroll-mode");
-    const descenteLegere = d.paysage ? clamp(Math.round(d.h * 0.014), 6, 10) : clamp(Math.round(d.h * 0.018), 10, 18);
-    const pointBasRougeVideo = d.paysage ? 0.585 : 0.585;
-    const topAncre = Math.round(d.h * pointBasRougeVideo + descenteLegere);
+    const descenteLegere = d.paysage ? 8 : clamp(Math.round(d.h * 0.018), 10, 18);
+    const topAncre = Math.round(d.h * (d.paysage ? 0.42 : 0.545) + descenteLegere);
     const margeLecteur = d.paysage ? 5 : 6;
     const basFinal = Math.round(topLecteurMedia() - margeLecteur);
-    const hauteurGrande = Math.max(d.paysage ? 74 : 92, basFinal - topAncre);
+    const hauteurGrande = Math.max(d.paysage ? 82 : 112, basFinal - topAncre);
     topCible = topAncre;
     hauteurCible = hauteurGrande;
     if (topActuel === null || force) {
@@ -9989,4 +9694,496 @@ html,body {
 }
 )();
 </script>
+
+
+
+
+
+<style id="gpc-red-safe-super-layout-final">
+:root {
+  --gpc-red-top-pct:22;
+  --gpc-red-bottom-pct:57;
+  --gpc-safe-menu-top:10px;
+  --gpc-safe-menu-gap:18px;
+  --gpc-safe-button-font:18px;
+  --gpc-safe-button-min-height:24px;
+  --gpc-safe-timer-top:76px;
+  --gpc-safe-timer-font:68px;
+  --gpc-safe-rules-top:62vh;
+  --gpc-safe-rules-height:24vh;
+  --gpc-safe-rules-font:24px;
+  --gpc-safe-rules-line:1.22;
+  --gpc-safe-rules-pad-y:12px;
+  --gpc-safe-rules-pad-x:14px;
+  --gpc-safe-contact-top:70vh;
+  --gpc-safe-contact-font:50px;
+  --gpc-safe-audio-bottom:38px;
+  --gpc-safe-audio-width:220px;
+  --gpc-safe-audio-control-height:32px;
+  --gpc-safe-audio-label-font:15px;
+  --gpc-safe-audio-subtitle-font:42px;
+  --gpc-safe-progress-width:360px;
+}
+
+#menuPrincipal {
+  position:fixed !important;
+  left:50% !important;
+  top:var(--gpc-safe-menu-top) !important;
+  width:100% !important;
+  max-width:100vw !important;
+  box-sizing:border-box !important;
+  margin:0 !important;
+  padding:0 12px !important;
+  transform:translate3d(-50%,0,0) !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:var(--gpc-safe-menu-gap) !important;
+  z-index:30000 !important;
+  pointer-events:auto !important;
+  background:transparent !important;
+}
+
+#menuPrincipal button {
+  font-size:var(--gpc-safe-button-font) !important;
+  line-height:1.02 !important;
+  min-height:var(--gpc-safe-button-min-height) !important;
+  margin:0 !important;
+  padding:0 2px !important;
+  transform:none !important;
+  white-space:nowrap !important;
+}
+
+.paris-timer {
+  position:fixed !important;
+  top:var(--gpc-safe-timer-top) !important;
+  left:50% !important;
+  transform:translate3d(-50%,0,0) !important;
+  font-size:var(--gpc-safe-timer-font) !important;
+  line-height:1 !important;
+  z-index:29990 !important;
+  margin:0 !important;
+  pointer-events:none !important;
+  white-space:nowrap !important;
+}
+
+#apropos {
+  position:fixed !important;
+  left:50% !important;
+  top:var(--gpc-safe-rules-top) !important;
+  bottom:auto !important;
+  width:min(92vw,900px) !important;
+  max-width:min(92vw,900px) !important;
+  height:var(--gpc-safe-rules-height) !important;
+  min-height:70px !important;
+  max-height:var(--gpc-safe-rules-height) !important;
+  margin:0 !important;
+  padding:var(--gpc-safe-rules-pad-y) var(--gpc-safe-rules-pad-x) !important;
+  transform:translate3d(-50%,0,0) !important;
+  box-sizing:border-box !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior:contain !important;
+  touch-action:pan-y pinch-zoom !important;
+  pointer-events:auto !important;
+  z-index:18000 !important;
+  contain:layout paint style !important;
+  scrollbar-width:thin !important;
+}
+
+#apropos.active {
+  display:block !important;
+}
+
+#apropos .card {
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 auto !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+  background:transparent !important;
+}
+
+#apropos h1,
+#apropos.gpc-starthere-mode h1 {
+  font-size:var(--gpc-safe-rules-font) !important;
+  line-height:var(--gpc-safe-rules-line) !important;
+  margin:0 !important;
+  padding:0 !important;
+  letter-spacing:0 !important;
+  white-space:normal !important;
+  word-break:normal !important;
+  overflow-wrap:anywhere !important;
+  text-align:center !important;
+}
+
+#apropos .magicbox-arrow {
+  flex:0 0 auto !important;
+}
+
+#contact {
+  position:fixed !important;
+  left:50% !important;
+  top:var(--gpc-safe-contact-top) !important;
+  bottom:auto !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 !important;
+  padding:0 12px !important;
+  transform:translate3d(-50%,-50%,0) !important;
+  box-sizing:border-box !important;
+  overflow:visible !important;
+  pointer-events:none !important;
+  z-index:18500 !important;
+}
+
+#contact.active {
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+}
+
+#contact .card {
+  margin:0 auto !important;
+  padding:0 !important;
+  background:transparent !important;
+}
+
+#contact h1 {
+  font-size:var(--gpc-safe-contact-font) !important;
+  line-height:1.04 !important;
+  margin:0 !important;
+  transform:none !important;
+  white-space:nowrap !important;
+}
+
+.audio-box {
+  position:fixed !important;
+  left:50% !important;
+  bottom:var(--gpc-safe-audio-bottom) !important;
+  width:var(--gpc-safe-audio-width) !important;
+  max-width:92vw !important;
+  transform:translate3d(-50%,0,0) !important;
+  z-index:20040 !important;
+  margin:0 !important;
+}
+
+.audio-word-display {
+  font-size:var(--gpc-safe-audio-subtitle-font) !important;
+  min-height:calc(var(--gpc-safe-audio-subtitle-font) * 1.05) !important;
+  margin-bottom:5px !important;
+}
+
+audio {
+  height:var(--gpc-safe-audio-control-height) !important;
+}
+
+.volume-boost-box label {
+  font-size:var(--gpc-safe-audio-label-font) !important;
+  line-height:1.05 !important;
+  margin:1px auto 1px auto !important;
+}
+
+.volume-slider-wrap,
+.audio-progress-wrap,
+.audio-time-row {
+  width:var(--gpc-safe-progress-width) !important;
+  max-width:92vw !important;
+}
+
+@media screen and (min-width:769px) {
+  #menuPrincipal {
+    flex-direction:row !important;
+  }
+
+  #apropos {
+    width:min(86vw,880px) !important;
+    max-width:min(86vw,880px) !important;
+  }
+}
+
+@media screen and (max-width:768px) {
+  #menuPrincipal {
+    flex-direction:column !important;
+    padding:0 8px !important;
+  }
+
+  #menuPrincipal button {
+    max-width:96vw !important;
+    overflow:hidden !important;
+    text-overflow:clip !important;
+  }
+
+  #apropos {
+    width:calc(100vw - 22px) !important;
+    max-width:calc(100vw - 22px) !important;
+    min-height:64px !important;
+  }
+
+  #apropos .magicbox-arrow {
+    width:8px !important;
+    height:8px !important;
+    border-right-width:1.5px !important;
+    border-bottom-width:1.5px !important;
+  }
+
+  #apropos .magicbox-arrow-down {
+    margin:0 8px 6px auto !important;
+  }
+
+  #apropos .magicbox-arrow-up {
+    margin:6px auto 0 auto !important;
+  }
+
+  .audio-progress-box {
+    margin-top:2px !important;
+  }
+
+  .audio-time-row {
+    margin-top:1px !important;
+    font-size:7px !important;
+  }
+
+  #volumeBoost,
+  #audioProgress {
+    height:9px !important;
+  }
+
+  #volumeBoost::-webkit-slider-runnable-track,
+  #audioProgress::-webkit-slider-runnable-track {
+    height:4px !important;
+  }
+
+  #volumeBoost::-moz-range-track,
+  #audioProgress::-moz-range-track {
+    height:4px !important;
+  }
+}
+
+@media screen and (max-width:900px) and (max-height:500px) and (orientation:landscape) {
+  #menuPrincipal {
+    flex-direction:row !important;
+    padding:0 8px !important;
+  }
+
+  #apropos {
+    width:min(90vw,680px) !important;
+    max-width:min(90vw,680px) !important;
+    min-height:58px !important;
+  }
+
+  #contact h1 {
+    white-space:nowrap !important;
+  }
+}
+</style>
+
+
+<script id="gpc-red-safe-super-layout-script-final">
+(function() {
+  "use strict";
+
+  const root = document.documentElement;
+  const RED_TOP = 0.220;
+  const RED_BOTTOM = 0.570;
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function px(value) {
+    return Math.round(value * 100) / 100 + "px";
+  }
+
+  function setVar(name, value) {
+    root.style.setProperty(name, value);
+  }
+
+  function visible(node) {
+    if (!node) return false;
+    const cs = window.getComputedStyle(node);
+    return cs.display !== "none" && cs.visibility !== "hidden" && Number(cs.opacity || 1) !== 0;
+  }
+
+  function viewport() {
+    const w = Math.max(240, Math.round(window.innerWidth || document.documentElement.clientWidth || screen.width || 390));
+    const h = Math.max(320, Math.round(window.innerHeight || document.documentElement.clientHeight || screen.height || 720));
+    const paysageCompact = w <= 900 && h <= 500 && window.matchMedia("(orientation: landscape)").matches;
+    const mobile = w <= 768 || paysageCompact;
+    return { w, h, mobile, paysageCompact };
+  }
+
+  function appliquerBase() {
+    const d = viewport();
+    const w = d.w;
+    const h = d.h;
+    const redTop = h * RED_TOP;
+    const redBottom = h * RED_BOTTOM;
+    const marge = clamp(h * 0.024, 8, 26);
+    const safeBottom = redBottom + marge;
+
+    setVar("--gpc-red-top-px", px(redTop));
+    setVar("--gpc-red-bottom-px", px(redBottom));
+
+    if (d.paysageCompact) {
+      setVar("--gpc-safe-menu-top", px(clamp(h * 0.018, 5, 10)));
+      setVar("--gpc-safe-menu-gap", px(clamp(w * 0.018, 8, 18)));
+      setVar("--gpc-safe-button-font", px(clamp(Math.min(w * 0.022, h * 0.050), 11, 15)));
+      setVar("--gpc-safe-button-min-height", px(clamp(h * 0.055, 18, 24)));
+      setVar("--gpc-safe-audio-bottom", px(clamp(h * 0.018, 6, 12)));
+      setVar("--gpc-safe-audio-width", px(clamp(w * 0.23, 150, 210)));
+      setVar("--gpc-safe-audio-control-height", px(clamp(h * 0.058, 20, 24)));
+      setVar("--gpc-safe-audio-label-font", px(clamp(h * 0.030, 9, 12)));
+      setVar("--gpc-safe-audio-subtitle-font", px(clamp(w * 0.040, 18, 30)));
+      setVar("--gpc-safe-progress-width", px(clamp(w * 0.40, 210, 300)));
+    } else if (d.mobile) {
+      setVar("--gpc-safe-menu-top", px(clamp(h * 0.008, 4, 9)));
+      setVar("--gpc-safe-menu-gap", px(clamp(h * 0.006, 3, 7)));
+      setVar("--gpc-safe-button-font", px(clamp(Math.min(w * 0.038, h * 0.023), 12, 16)));
+      setVar("--gpc-safe-button-min-height", px(clamp(h * 0.030, 18, 24)));
+      setVar("--gpc-safe-audio-bottom", px(clamp(h * 0.020, 10, 24)));
+      setVar("--gpc-safe-audio-width", px(clamp(w * 0.56, 176, 238)));
+      setVar("--gpc-safe-audio-control-height", px(clamp(h * 0.034, 22, 28)));
+      setVar("--gpc-safe-audio-label-font", px(clamp(w * 0.031, 10, 13)));
+      setVar("--gpc-safe-audio-subtitle-font", px(clamp(w * 0.062, 20, 31)));
+      setVar("--gpc-safe-progress-width", px(clamp(w * 0.72, 230, 330)));
+    } else {
+      setVar("--gpc-safe-menu-top", px(clamp(h * 0.018, 10, 20)));
+      setVar("--gpc-safe-menu-gap", px(clamp(w * 0.018, 20, 42)));
+      setVar("--gpc-safe-button-font", px(clamp(w * 0.0125, 16, 21)));
+      setVar("--gpc-safe-button-min-height", px(clamp(h * 0.030, 24, 34)));
+      setVar("--gpc-safe-audio-bottom", px(clamp(h * 0.040, 24, 48)));
+      setVar("--gpc-safe-audio-width", px(clamp(w * 0.115, 210, 250)));
+      setVar("--gpc-safe-audio-control-height", px(clamp(h * 0.030, 28, 34)));
+      setVar("--gpc-safe-audio-label-font", px(clamp(w * 0.008, 13, 18)));
+      setVar("--gpc-safe-audio-subtitle-font", px(clamp(w * 0.028, 34, 58)));
+      setVar("--gpc-safe-progress-width", px(clamp(w * 0.28, 320, 440)));
+    }
+
+    setVar("--gpc-safe-rules-top", px(safeBottom));
+    setVar("--gpc-safe-contact-top", px(safeBottom + 40));
+  }
+
+  function ajusterMesures() {
+    const d = viewport();
+    const w = d.w;
+    const h = d.h;
+    const redTop = h * RED_TOP;
+    const redBottom = h * RED_BOTTOM;
+    const marge = clamp(h * 0.024, 8, 26);
+    const nav = el("menuPrincipal");
+    const timer = el("parisTimer");
+    const audio = document.querySelector(".audio-box");
+
+    const navRect = visible(nav) ? nav.getBoundingClientRect() : { bottom: 0, height: 0 };
+    let timerFont = d.paysageCompact ? clamp(Math.min(w * 0.052, h * 0.115), 24, 38) : d.mobile ? clamp(Math.min(w * 0.104, h * 0.072), 32, 50) : clamp(Math.min(w * 0.045, h * 0.074), 38, 80);
+    setVar("--gpc-safe-timer-font", px(timerFont));
+
+    let timerHeight = timer ? Math.max(timer.getBoundingClientRect().height, timerFont * 1.02) : timerFont * 1.02;
+    const wantedGap = d.mobile ? clamp(h * 0.009, 5, 10) : clamp(h * 0.014, 10, 18);
+    let timerTop = navRect.bottom + wantedGap;
+    let maxTimerTop = redTop - marge - timerHeight;
+
+    if (timerTop > maxTimerTop) {
+      const available = Math.max(26, redTop - marge - navRect.bottom - wantedGap);
+      timerFont = d.mobile ? clamp(available * 0.92, 28, timerFont) : clamp(available * 0.92, 32, timerFont);
+      setVar("--gpc-safe-timer-font", px(timerFont));
+      timerHeight = timerFont * 1.02;
+      maxTimerTop = redTop - marge - timerHeight;
+      timerTop = Math.max(navRect.bottom + 2, maxTimerTop);
+    }
+
+    setVar("--gpc-safe-timer-top", px(Math.max(2, timerTop)));
+
+    const audioRect = visible(audio) ? audio.getBoundingClientRect() : { top: h - clamp(h * 0.22, 120, 190), height: clamp(h * 0.16, 86, 150) };
+    let audioTop = audioRect.top;
+    if (!Number.isFinite(audioTop) || audioTop <= 0) audioTop = h - clamp(h * 0.22, 120, 190);
+
+    const lowerStart = redBottom + marge;
+    let lowerEnd = Math.min(h - marge, audioTop - marge);
+    const minRules = d.paysageCompact ? 58 : d.mobile ? 78 : 110;
+
+    if (lowerEnd < lowerStart + minRules) {
+      lowerEnd = Math.min(h - marge, lowerStart + minRules);
+    }
+
+    const rulesTop = lowerStart;
+    const rulesHeight = Math.max(minRules, lowerEnd - rulesTop);
+    const padY = d.paysageCompact ? clamp(rulesHeight * 0.065, 4, 8) : d.mobile ? clamp(rulesHeight * 0.075, 5, 10) : clamp(rulesHeight * 0.09, 10, 18);
+    const padX = d.mobile ? clamp(w * 0.022, 8, 14) : clamp(w * 0.010, 12, 18);
+    const availableForText = Math.max(40, rulesHeight - padY * 2 - (d.mobile ? 20 : 26));
+    let rulesFont = d.paysageCompact ? clamp(Math.min(w * 0.020, availableForText / 6.8), 10, 15) : d.mobile ? clamp(Math.min(w * 0.043, availableForText / 6.8), 11, 19) : clamp(Math.min(w * 0.0145, availableForText / 6.7), 17, 25);
+    let line = d.mobile ? clamp(availableForText / Math.max(1, rulesFont * 6.25), 1.03, 1.18) : clamp(availableForText / Math.max(1, rulesFont * 6.15), 1.08, 1.24);
+
+    setVar("--gpc-safe-rules-top", px(rulesTop));
+    setVar("--gpc-safe-rules-height", px(rulesHeight));
+    setVar("--gpc-safe-rules-pad-y", px(padY));
+    setVar("--gpc-safe-rules-pad-x", px(padX));
+    setVar("--gpc-safe-rules-font", px(rulesFont));
+    setVar("--gpc-safe-rules-line", String(Math.round(line * 1000) / 1000));
+
+    let contactFont = d.paysageCompact ? clamp(w * 0.036, 20, 30) : d.mobile ? clamp(w * 0.082, 23, 36) : clamp(w * 0.034, 36, 58);
+    const contactHeight = contactFont * 1.08;
+    let contactTop = lowerStart + contactHeight / 2 + (d.mobile ? 4 : 12);
+    const maxContactTop = audioTop - marge - contactHeight / 2;
+    const comfortableContactTop = d.paysageCompact ? h * 0.705 : d.mobile ? h * 0.700 : h * 0.715;
+
+    if (maxContactTop > contactTop) {
+      contactTop = clamp(comfortableContactTop, contactTop, maxContactTop);
+    }
+
+    setVar("--gpc-safe-contact-font", px(contactFont));
+    setVar("--gpc-safe-contact-top", px(contactTop));
+  }
+
+  function appliquer() {
+    appliquerBase();
+    requestAnimationFrame(function() {
+      ajusterMesures();
+      requestAnimationFrame(ajusterMesures);
+    });
+  }
+
+  function appliquerBientot() {
+    appliquer();
+    setTimeout(appliquer, 80);
+    setTimeout(appliquer, 260);
+    setTimeout(appliquer, 700);
+  }
+
+  window.addEventListener("resize", appliquerBientot, { passive:true });
+  window.addEventListener("orientationchange", appliquerBientot, { passive:true });
+  window.addEventListener("pageshow", appliquerBientot, { passive:true });
+  document.addEventListener("visibilitychange", function() {
+    if (!document.hidden) appliquerBientot();
+  }, { passive:true });
+  document.addEventListener("click", function(e) {
+    const t = e.target && e.target.textContent ? e.target.textContent.trim() : "";
+    if (t === "starthere" || t === "RULES" || t === "SEND A WAV / MP3" || t === "@gmail" || t === "@gmail.com") {
+      appliquerBientot();
+    }
+  }, { passive:true });
+
+  function cuissonLongueIntro() {
+    appliquerBientot();
+    setTimeout(appliquerBientot, 1200);
+    setTimeout(appliquerBientot, 3200);
+    setTimeout(appliquerBientot, 5400);
+    setTimeout(appliquerBientot, 6600);
+    setTimeout(appliquerBientot, 7600);
+    setTimeout(appliquerBientot, 9000);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", cuissonLongueIntro, { once:true, passive:true });
+  } else {
+    cuissonLongueIntro();
+  }
+})();
+</script>
+
 </body></html>
